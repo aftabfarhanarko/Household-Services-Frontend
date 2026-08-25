@@ -148,7 +148,7 @@ export default function AboutClientPage() {
       </section>
 
       {/* TEAM */}
-      <section className="py-8 md:py-12 bg-transparent">
+      <section className="py-8 md:py-14 bg-transparent">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <RevealSection className="text-center mb-10 md:mb-14">
             <span className="inline-flex items-center gap-2 text-xs font-bold text-[#FF6014] uppercase tracking-wider bg-rose-50 px-3.5 py-1.5 rounded-full border border-rose-100 mb-3">
@@ -168,48 +168,57 @@ export default function AboutClientPage() {
                 <motion.div
                   key={i}
                   variants={fadeUp}
-                  whileHover={{ y: -6 }}
-                  transition={{ duration: 0.3 }}
-                  className="group relative bg-white rounded-3xl border border-[#FF6014]/20 overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_16px_36px_rgba(255,96,20,0.12)] hover:border-[#FF6014]/80 transition-all duration-300 flex flex-col justify-between"
+                  whileHover={{ y: -8 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  className="group relative bg-white rounded-3xl border border-[#FF6014]/20 overflow-hidden shadow-[0_4px_25px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(255,96,20,0.12)] hover:border-[#FF6014] transition-all duration-300 flex flex-col justify-between"
                 >
-                  {/* Top Image Box with Gradient Overlay */}
-                  <div className="relative h-64 sm:h-72 overflow-hidden bg-slate-100">
+                  {/* Top Image Container */}
+                  <div className="relative h-72 sm:h-80 overflow-hidden bg-slate-900">
                     <Image
                       src={member.avatar}
                       alt={member.name}
                       fill
-                      className="object-cover group-hover:scale-108 transition-transform duration-700 ease-out"
+                      className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out opacity-95 group-hover:opacity-100"
                       sizes="(max-width: 768px) 100vw, 33vw"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent" />
                     
-                    {/* Role Badge floating over image */}
-                    <div className="absolute top-4 left-4 z-10">
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-[10px] font-black uppercase tracking-wider text-[#FF6014] shadow-md border border-white/40">
+                    {/* Role & Experience Floating Badges */}
+                    <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-10">
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/95 backdrop-blur-md text-[10px] font-black uppercase tracking-wider text-[#FF6014] shadow-sm border border-white/60">
                         <Sparkles size={11} className="fill-[#FF6014]" /> {member.role}
                       </span>
+                      {member.experience && (
+                        <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-black/50 backdrop-blur-md text-[10px] font-bold text-white border border-white/20">
+                          {member.experience}
+                        </span>
+                      )}
                     </div>
 
-                    {/* Member Name over bottom of image */}
+                    {/* Member Name over Image Bottom */}
                     <div className="absolute bottom-4 left-4 right-4 z-10">
-                      <h3 className="text-lg md:text-xl font-bold text-white leading-tight drop-shadow-sm group-hover:text-rose-200 transition-colors">
+                      <h3 className="text-xl font-extrabold text-white leading-tight drop-shadow-sm group-hover:text-orange-200 transition-colors">
                         {member.name}
                       </h3>
                     </div>
                   </div>
 
-                  {/* Body Content */}
-                  <div className="p-5 sm:p-6 flex flex-col justify-between flex-1 bg-white">
-                    <p className="text-xs md:text-sm text-slate-500 font-medium leading-relaxed mb-4 line-clamp-3">
+                  {/* Card Body */}
+                  <div className="p-6 flex flex-col justify-between flex-1 bg-white">
+                    <p className="text-xs md:text-sm text-slate-500 font-semibold leading-relaxed mb-6 line-clamp-3">
                       {member.bio}
                     </p>
 
-                    {/* Bottom Guarantee Badge */}
-                    <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
-                      <span className="text-[11px] font-bold text-emerald-600 flex items-center gap-1.5">
-                        <CheckCircle2 size={13} className="text-emerald-500" /> Verified Executive
-                      </span>
-                      <span className="w-2 h-2 rounded-full bg-[#FF6014] animate-pulse" />
+                    {/* Verified Status & Social Connect Footer */}
+                    <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
+                      <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-600">
+                        <CheckCircle2 size={14} className="text-emerald-500" />
+                        <span>Verified Executive</span>
+                      </div>
+
+                      <div className="flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-[#FF6014] animate-pulse" />
+                      </div>
                     </div>
                   </div>
                 </motion.div>

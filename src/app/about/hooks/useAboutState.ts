@@ -7,9 +7,33 @@ import { getRoleName } from "@/redux/features/auth/authSlice";
 import { useGetPublicStatsQuery } from "@/redux/features/landing/landingApi";
 
 const TEAM_MEMBERS_FALLBACK = [
-  { name: "Mahbubur Rahman", role: "Founder & CEO", bio: "Pioneering digital logistics for urban home maintenance, driven to establish job security and dignity for service professionals.", avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop" },
-  { name: "Farhana Yasmin", role: "Head of Customer Experience", bio: "Setting strict SLA protocols and service compliance measures to ensure every customer is delighted on every visit.", avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&auto=format&fit=crop" },
-  { name: "Asif Adnan", role: "Director of Vendor Operations", bio: "Leading verification audits and continuous skill training labs to verify only the top 5% of technicians join Rajseba.", avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200&auto=format&fit=crop" },
+  {
+    name: "Mahbubur Rahman",
+    role: "Founder & CEO",
+    bio: "Pioneering digital logistics for urban home maintenance, driven to establish job security and dignity for service professionals.",
+    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=600&auto=format&fit=crop",
+    linkedin: "https://linkedin.com",
+    facebook: "https://facebook.com",
+    experience: "10+ Yrs Exp",
+  },
+  {
+    name: "Farhana Yasmin",
+    role: "Head of Customer Experience",
+    bio: "Setting strict SLA protocols and service compliance measures to ensure every customer is delighted on every visit.",
+    avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=600&auto=format&fit=crop",
+    linkedin: "https://linkedin.com",
+    facebook: "https://facebook.com",
+    experience: "8+ Yrs Exp",
+  },
+  {
+    name: "Asif Adnan",
+    role: "Director of Operations",
+    bio: "Leading verification audits and continuous skill training labs to verify only the top 5% of technicians join Rajseba.",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=600&auto=format&fit=crop",
+    linkedin: "https://linkedin.com",
+    facebook: "https://facebook.com",
+    experience: "7+ Yrs Exp",
+  },
 ];
 
 export function useAboutState() {
@@ -41,7 +65,10 @@ export function useAboutState() {
                 name: u.name || `${u.firstName || ""} ${u.lastName || ""}`.trim() || "Super Admin",
                 role: roleName,
                 bio: u.profile?.description || u.description || "Leading operations, technology, and service standards.",
-                avatar: profileImg || "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop"
+                avatar: profileImg || "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=600&auto=format&fit=crop",
+                linkedin: u.linkedin || "https://linkedin.com",
+                facebook: u.facebook || "https://facebook.com",
+                experience: "Verified Lead",
               };
             });
             setTeamMembers(mappedTeam);

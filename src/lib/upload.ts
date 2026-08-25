@@ -1,20 +1,43 @@
 /**
- * Uploads a file (image) directly to our backend NestJS API server and returns the uploaded image URL.
+ * Uploads an image using ImgBB API with fallback to local NestJS backend upload.
  * 
+ * API Key: a6c948ab64f7987bbf9e5477cde3a1cb
  * @param file - The Image file to upload.
  */
 import { formatImageUrl } from "@/lib/utils";
 
+const IMGBB_API_KEY = process.env.NEXT_PUBLIC_IMGBB_API_KEY || "a6c948ab64f7987bbf9e5477cde3a1cb";
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://home-services-backend-b6v4.onrender.com";
 
 export const uploadImage = async (file: File): Promise<string> => {
-  const formData = new FormData();
-  formData.append("file", file);
-
+  // 1. Try uploading to ImgBB first
   try {
-    const response = await fetch(`${API_URL}/upload`, {
+    const formData = new FormData();
+    formData.append("image", file);
+
+    const imgbbResponse = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`, {
       method: "POST",
       body: formData,
+    });
+
+    if (imgbbResponse.ok) {
+      const imgbbData = await imgbbResponse.json();
+      if (imgbbData && imgbbData.data && imgbbData.data.url) {
+        return imgbbData.data.url;
+      }
+    }
+  } catch (imgbbError) {
+    console.warn("ImgBB upload failed, attempting fallback to backend upload server:", imgbbError);
+  }
+
+  // 2. Fallback to NestJS backend /upload endpoint
+  try {
+    const backendFormData = new FormData();
+    backendFormData.append("file", file);
+
+    const response = await fetch(`${API_URL}/upload`, {
+      method: "POST",
+      body: backendFormData,
     });
 
     if (!response.ok) {

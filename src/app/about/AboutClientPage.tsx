@@ -148,25 +148,69 @@ export default function AboutClientPage() {
       </section>
 
       {/* TEAM */}
-      <section className="py-6 md:py-10 bg-transparent">
+      <section className="py-8 md:py-12 bg-transparent">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
-          <RevealSection className="text-center mb-10">
-            <span className="inline-flex items-center gap-1.5 text-[10px] font-extrabold text-[#FF6014] uppercase tracking-[.12em] bg-[#FFF4EE] px-3.5 py-1.5 rounded-full border border-[#FF6014]/20 mb-4"><Users className="w-3.5 h-3.5" />Our Leadership</span>
-            <h2 className="text-lg md:text-xl lg:text-2xl font-medium text-slate-900 tracking-tight mb-3">Meet the Team</h2>
-            <p className="text-[13px] text-slate-400 font-medium max-w-sm mx-auto leading-relaxed">The people driving Rajseba's mission of affordable, professional home care.</p>
+          <RevealSection className="text-center mb-10 md:mb-14">
+            <span className="inline-flex items-center gap-2 text-xs font-bold text-[#FF6014] uppercase tracking-wider bg-rose-50 px-3.5 py-1.5 rounded-full border border-rose-100 mb-3">
+              <Users className="w-3.5 h-3.5" /> Leadership & Visionaries
+            </span>
+            <h2 className="text-lg md:text-xl lg:text-2xl font-medium text-slate-900 tracking-tight mb-3">
+              Meet the <span className="text-[#FF6014]">Team</span>
+            </h2>
+            <p className="text-sm md:text-base text-slate-500 font-medium max-w-md mx-auto leading-relaxed">
+              The passionate professionals driving Rajseba's mission of safe, verified, and reliable home care.
+            </p>
           </RevealSection>
+
           <RevealSection variants={stagger}>
-            <div className="grid md:grid-cols-3 gap-5">
+            <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
               {teamMembers.map((member, i) => (
-                <motion.div key={i} variants={fadeUp} className="group bg-white rounded-3xl border border-slate-100 overflow-hidden hover:border-[#FF6014]/15 hover:shadow-[0_12px_40px_rgba(255,96,20,0.05)] transition-all duration-300">
-                  <div className="relative h-48 overflow-hidden bg-slate-100">
-                    <Image src={member.avatar} alt={member.name} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="(max-width: 768px) 100vw, 33vw" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/50 to-transparent" />
+                <motion.div
+                  key={i}
+                  variants={fadeUp}
+                  whileHover={{ y: -6 }}
+                  transition={{ duration: 0.3 }}
+                  className="group relative bg-white rounded-3xl border border-[#FF6014]/20 overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_16px_36px_rgba(255,96,20,0.12)] hover:border-[#FF6014]/80 transition-all duration-300 flex flex-col justify-between"
+                >
+                  {/* Top Image Box with Gradient Overlay */}
+                  <div className="relative h-64 sm:h-72 overflow-hidden bg-slate-100">
+                    <Image
+                      src={member.avatar}
+                      alt={member.name}
+                      fill
+                      className="object-cover group-hover:scale-108 transition-transform duration-700 ease-out"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300" />
+                    
+                    {/* Role Badge floating over image */}
+                    <div className="absolute top-4 left-4 z-10">
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-[10px] font-black uppercase tracking-wider text-[#FF6014] shadow-md border border-white/40">
+                        <Sparkles size={11} className="fill-[#FF6014]" /> {member.role}
+                      </span>
+                    </div>
+
+                    {/* Member Name over bottom of image */}
+                    <div className="absolute bottom-4 left-4 right-4 z-10">
+                      <h3 className="text-lg md:text-xl font-bold text-white leading-tight drop-shadow-sm group-hover:text-rose-200 transition-colors">
+                        {member.name}
+                      </h3>
+                    </div>
                   </div>
-                  <div className="p-5">
-                    <p className="text-[9px] font-extrabold text-[#FF6014] uppercase tracking-[.12em] mb-1">{member.role}</p>
-                    <h3 className="text-base font-black text-slate-900 mb-2">{member.name}</h3>
-                    <p className="text-[11px] text-slate-400 font-medium leading-relaxed">{member.bio}</p>
+
+                  {/* Body Content */}
+                  <div className="p-5 sm:p-6 flex flex-col justify-between flex-1 bg-white">
+                    <p className="text-xs md:text-sm text-slate-500 font-medium leading-relaxed mb-4 line-clamp-3">
+                      {member.bio}
+                    </p>
+
+                    {/* Bottom Guarantee Badge */}
+                    <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
+                      <span className="text-[11px] font-bold text-emerald-600 flex items-center gap-1.5">
+                        <CheckCircle2 size={13} className="text-emerald-500" /> Verified Executive
+                      </span>
+                      <span className="w-2 h-2 rounded-full bg-[#FF6014] animate-pulse" />
+                    </div>
                   </div>
                 </motion.div>
               ))}

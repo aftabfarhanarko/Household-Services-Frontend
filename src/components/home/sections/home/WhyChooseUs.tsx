@@ -89,10 +89,10 @@ export default function WhyChooseUs() {
                   text-center h-full
                   rounded-2xl sm:rounded-[32px] p-3 sm:p-6 lg:p-8
                   bg-gradient-to-br from-white to-[#e8eaed]
-                  border-[2px] border-blue-500/30
+                  border-[2px] border-[#FF6014]/30
                   cursor-default
                   transition-all duration-300
-                  hover:border-blue-500/80 hover:shadow-[0_8px_30px_rgba(59,130,246,0.25)]
+                  hover:border-[#FF6014]/80 hover:shadow-[0_8px_30px_rgba(255,96,20,0.25)]
                 "
               >
                 {/* Top gloss sheen */}

@@ -4,6 +4,8 @@ import React, { useEffect } from "react";
 import { X, Plus, Minus, HelpCircle } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 
+import { formatImageUrl } from "@/lib/utils";
+
 interface SubServiceDetailProps {
   subService: any;
   onClose: () => void;
@@ -115,7 +117,7 @@ export function SubServiceDetailCard({
               {subService.image1 && (
                 <div className="relative aspect-video rounded-2xl overflow-hidden border border-slate-100 shadow-2xs group/img">
                   <img
-                    src={subService.image1}
+                    src={formatImageUrl(subService.image1)}
                     alt={`${subService.name} Gallery 1`}
                     className="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-500"
                   />
@@ -124,7 +126,7 @@ export function SubServiceDetailCard({
               {subService.image2 && (
                 <div className="relative aspect-video rounded-2xl overflow-hidden border border-slate-100 shadow-2xs group/img">
                   <img
-                    src={subService.image2}
+                    src={formatImageUrl(subService.image2)}
                     alt={`${subService.name} Gallery 2`}
                     className="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-500"
                   />
@@ -304,7 +306,7 @@ export function SubServiceDetailDrawer({
                     {subService.image1 && (
                       <div className="relative aspect-video rounded-2xl overflow-hidden border border-slate-100 shadow-2xs">
                         <img
-                          src={subService.image1}
+                          src={formatImageUrl(subService.image1)}
                           alt={`${subService.name} Gallery 1`}
                           className="w-full h-full object-cover"
                         />
@@ -313,7 +315,7 @@ export function SubServiceDetailDrawer({
                     {subService.image2 && (
                       <div className="relative aspect-video rounded-2xl overflow-hidden border border-slate-100 shadow-2xs">
                         <img
-                          src={subService.image2}
+                          src={formatImageUrl(subService.image2)}
                           alt={`${subService.name} Gallery 2`}
                           className="w-full h-full object-cover"
                         />

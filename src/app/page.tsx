@@ -8,7 +8,9 @@ import Stats from "@/components/home/sections/home/Stats";
 import SpecialOffers from "@/components/home/sections/home/SpecialOffers";
 import FeaturedProviders from "@/components/home/sections/home/FeaturedProviders";
 import ServiceAreas from "@/components/home/sections/home/ServiceAreas";
-// import PartnerCta from "@/components/home/sections/home/PartnerCta";
+import SafetyGuarantee from "@/components/home/sections/home/SafetyGuarantee";
+import ComparisonSection from "@/components/home/sections/home/ComparisonSection";
+import HowItLooks from "@/components/home/sections/home/HowItLooks";
 import FAQ from "@/components/home/sections/home/FAQ";
 import HomeMotionWrapper from "@/components/home/HomeMotionWrapper";
 import ScrollToTop from "@/components/home/ScrollToTop";
@@ -155,9 +157,19 @@ export default function Home() {
             <SpecialOffers />
           </HomeMotionWrapper>
 
+          {/* 🛡️ Safety & Quality Guarantee Section */}
+          <HomeMotionWrapper>
+            <SafetyGuarantee />
+          </HomeMotionWrapper>
+
           {/* 👷 Top Professionals — builds trust before WhyChooseUs */}
           <HomeMotionWrapper>
             <FeaturedProviders />
+          </HomeMotionWrapper>
+
+          {/* 📊 Rajseba vs Local Technicians Comparison */}
+          <HomeMotionWrapper>
+            <ComparisonSection />
           </HomeMotionWrapper>
 
           <HomeMotionWrapper>
@@ -166,6 +178,11 @@ export default function Home() {
 
           <HomeMotionWrapper>
             <Stats />
+          </HomeMotionWrapper>
+
+          {/* 🎬 Real Work Showcase */}
+          <HomeMotionWrapper>
+            <HowItLooks />
           </HomeMotionWrapper>
 
           {/* 🗺️ Coverage Map — shown after stats to answer "is this available near me?" */}

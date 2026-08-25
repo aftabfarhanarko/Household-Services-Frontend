@@ -116,6 +116,10 @@ function getCategorySubtitle(name: string): string {
 const LEFT_NAV_LINKS: NavLink[] = [
   { label: "Home", href: "/", icon: HomeIcon },
   { label: "Services", href: "/services", icon: Briefcase, hasDropdown: true },
+  { label: "Bookings", href: "/bookings", icon: Calendar },
+  { label: "About Us", href: "/about", icon: Info },
+  { label: "Contact", href: "/contact", icon: PhoneCall },
+  { label: "Opportunity", href: "/opportunity", icon: TrendingUp },
 ];
 
 const RIGHT_NAV_LINKS: NavLink[] = [];

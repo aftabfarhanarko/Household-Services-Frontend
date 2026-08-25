@@ -164,10 +164,10 @@ const ExploreCategories = () => {
                         flex flex-col items-center justify-center
                         h-full rounded-2xl md:rounded-[20px] p-2.5 md:p-4 lg:p-5
                         bg-gradient-to-br from-white to-[#e8eaed]
-                        border border-blue-500/20 hover:border-blue-500/70
+                        border border-[#FF6014]/20 hover:border-[#FF6014]/70
                         cursor-pointer
                         transition-all duration-350 ease-out
-                        hover:shadow-[0_8px_20px_rgba(59,130,246,0.12),0_0_0_3px_rgba(59,130,246,0.1)]
+                        hover:shadow-[0_8px_20px_rgba(255,96,20,0.12),0_0_0_3px_rgba(255,96,20,0.1)]
                         hover:-translate-y-[2px]
                         category-card-blue-animated
                       "
@@ -248,10 +248,10 @@ const ExploreCategories = () => {
                       flex flex-col items-center justify-center
                       h-full rounded-2xl md:rounded-[20px] p-2.5 md:p-4 lg:p-5
                       bg-gradient-to-br from-white to-[#e8eaed]
-                      border border-blue-500/20 hover:border-blue-500/70
+                      border border-[#FF6014]/20 hover:border-[#FF6014]/70
                       cursor-pointer
                       transition-all duration-350 ease-out
-                      hover:shadow-[0_8px_20px_rgba(59,130,246,0.12),0_0_0_3px_rgba(59,130,246,0.1)]
+                      hover:shadow-[0_8px_20px_rgba(255,96,20,0.12),0_0_0_3px_rgba(255,96,20,0.1)]
                       hover:-translate-y-[2px]
                       category-card-blue-animated
                     "
@@ -320,10 +320,10 @@ const ExploreCategories = () => {
                       flex flex-col items-center justify-center
                       h-full rounded-2xl md:rounded-[20px] p-2.5 md:p-4 lg:p-5
                       bg-gradient-to-br from-white to-[#e8eaed]
-                      border border-blue-500/20 hover:border-blue-500/70
+                      border border-[#FF6014]/20 hover:border-[#FF6014]/70
                       cursor-pointer
                       transition-all duration-350 ease-out
-                      hover:shadow-[0_8px_20px_rgba(59,130,246,0.12),0_0_0_3px_rgba(59,130,246,0.1)]
+                      hover:shadow-[0_8px_20px_rgba(255,96,20,0.12),0_0_0_3px_rgba(255,96,20,0.1)]
                       hover:-translate-y-[2px]
                       category-card-blue-animated
                     "

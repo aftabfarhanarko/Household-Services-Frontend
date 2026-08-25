@@ -16,18 +16,16 @@ export const authApi = baseApi.injectEndpoints({
         }
       },
     }),
-    login: builder.mutation<User, any>({
+    login: builder.mutation<any, { email: string; password: string }>({
       query: (credentials) => ({
         url: '/auth/login',
         method: 'POST',
         body: credentials,
       }),
-      // We rely on the component to call `setTokens` or update store, or we could do it here
-      // But baseApi already handles attaching the token from localStorage if we set it.
     }),
-    register: builder.mutation<User, any>({
+    register: builder.mutation<any, { name: string; phone?: string; email?: string; password?: string; roleId?: number; [key: string]: any }>({
       query: (userData) => ({
-        url: '/users',
+        url: '/auth/register',
         method: 'POST',
         body: userData,
       }),

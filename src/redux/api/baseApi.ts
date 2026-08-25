@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { getAccessToken, getRefreshToken, setTokens, clearTokens } from '@/lib/token';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://www.rajapi.jevxo.com";
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://home-services-backend-b6v4.onrender.com";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: API_BASE_URL,

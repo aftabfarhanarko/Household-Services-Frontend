@@ -5,7 +5,7 @@
  */
 import { formatImageUrl } from "@/lib/utils";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://www.rajapi.jevxo.com";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://home-services-backend-b6v4.onrender.com";
 
 export const uploadImage = async (file: File): Promise<string> => {
   const formData = new FormData();

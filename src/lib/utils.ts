@@ -5,7 +5,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-const DEFAULT_API_URL = process.env.NEXT_PUBLIC_API_URL || "https://www.rajapi.jevxo.com";
+const DEFAULT_API_URL = process.env.NEXT_PUBLIC_API_URL || "https://home-services-backend-b6v4.onrender.com";
 
 /**
  * Rewrites any backend image URL to point to the active API server.

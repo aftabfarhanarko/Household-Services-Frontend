@@ -15,23 +15,41 @@ export interface DisplayPackage {
 }
 
 function normalizePackageFeatures(pkg: any): string[] {
-  if (Array.isArray(pkg.features)) {
-    return pkg.features
+  // 1. Check features if it's a non-empty array
+  if (Array.isArray(pkg.features) && pkg.features.length > 0) {
+    const list = pkg.features
       .map((f: unknown) => String(f).trim())
       .filter((f: string) => f.length > 0);
+    if (list.length > 0) return list;
   }
 
+  // 2. Check features if it's a comma/newline separated string
   if (typeof pkg.features === "string" && pkg.features.trim()) {
-    return pkg.features
-      .split(",")
+    const list = pkg.features
+      .split(/[,;\n]/)
       .map((f: string) => f.trim())
       .filter((f: string) => f.length > 0);
+    if (list.length > 0) return list;
   }
 
-  if (pkg.items?.length > 0) {
-    return pkg.items
-      .map((it: any) => it.nestedService?.name)
+  // 3. Check nested items / packageItems / nestedServices
+  const itemsArray = pkg.items || pkg.packageItems || pkg.nestedServices || pkg.services || [];
+  if (Array.isArray(itemsArray) && itemsArray.length > 0) {
+    const list = itemsArray
+      .map((it: any) => it.nestedService?.name || it.name || it.title || it.service?.name)
       .filter(Boolean);
+    if (list.length > 0) return list;
+  }
+
+  // 4. Fallback: Extract short sentences from description if available
+  if (typeof pkg.description === "string" && pkg.description.trim()) {
+    const sentences = pkg.description
+      .split(/(?<=[.!?])\s+/)
+      .map((s: string) => s.trim())
+      .filter((s: string) => s.length > 8 && s.length < 80);
+    if (sentences.length > 1) {
+      return sentences.slice(0, 3);
+    }
   }
 
   return [];

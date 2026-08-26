@@ -191,6 +191,7 @@ export default function TopServices() {
               <motion.div
                 key={service.id}
                 variants={cardVariants}
+                transition={{ duration: 0.5, delay: i * 0.15, ease: "easeOut" }}
                 className="bg-white rounded-3xl overflow-hidden border border-[#FF6014]/20 group flex flex-col h-full hover-card-premium transition-all duration-300 hover:border-[#FF6014]/80 hover:shadow-[#FF6014]/20 hover:shadow-xl"
               >
                 {/* ── Illustration or image ── */}

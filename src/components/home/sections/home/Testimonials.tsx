@@ -31,7 +31,90 @@ const Testimonials = () => {
   const { data: reviewsRes, isLoading } = useGetPublicReviewsQuery();
   const rawReviews: any[] = reviewsRes?.data || (Array.isArray(reviewsRes) ? reviewsRes : []);
 
-  const reviews = rawReviews
+  const dummyReviews = [
+    {
+      name: "Bonnie M. Pattison",
+      location: "Happy mom from New York",
+      rating: 5,
+      comment: "Thanks to the personalized attention and guidance provided by the Prenatal Center. I highly recommend them to any Quisque faucibus quam justo, sit amet fermentum...",
+      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80",
+      hasVideo: true,
+    },
+    {
+      name: "Bonnie M. Pattison",
+      location: "Happy mom from New York",
+      rating: 5,
+      comment: "Thanks to the personalized attention and guidance provided by the Prenatal Center. I highly recommend them to any Quisque faucibus quam justo, sit amet fermentum...",
+      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80",
+      hasVideo: true,
+    },
+    {
+      name: "Bonnie M. Pattison",
+      location: "Happy mom from New York",
+      rating: 5,
+      comment: "Thanks to the personalized attention and guidance provided by the Prenatal Center. I highly recommend them to any Quisque faucibus quam justo, sit amet fermentum...",
+      avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80",
+      hasVideo: true,
+    },
+    {
+      name: "Bonnie M. Pattison",
+      location: "Happy mom from New York",
+      rating: 5,
+      comment: "Thanks to the personalized attention and guidance provided by the Prenatal Center. I highly recommend them to any Quisque faucibus quam justo, sit amet fermentum...",
+      avatar: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=600&q=80",
+      hasVideo: true,
+    },
+    {
+      name: "Bonnie M. Pattison",
+      location: "Happy mom from New York",
+      rating: 5,
+      comment: "Thanks to the personalized attention and guidance provided by the Prenatal Center. I highly recommend them to any Quisque faucibus quam justo, sit amet fermentum...",
+      avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80",
+      hasVideo: true,
+    },
+    {
+      name: "Bonnie M. Pattison",
+      location: "Happy mom from New York",
+      rating: 5,
+      comment: "Thanks to the personalized attention and guidance provided by the Prenatal Center. I highly recommend them to any Quisque faucibus quam justo, sit amet fermentum...",
+      avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=600&q=80",
+      hasVideo: true,
+    },
+    {
+      name: "Sarah Jenkins",
+      location: "Dhaka, Bangladesh",
+      rating: 5,
+      comment: "The service exceeded my expectations! Very professional staff and quick response times.",
+      avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=600&q=80",
+      hasVideo: true,
+    },
+    {
+      name: "Michael Chen",
+      location: "Chittagong, Bangladesh",
+      rating: 5,
+      comment: "Great experience working with Rajseba. Highly organized and reliable team.",
+      avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=600&q=80",
+      hasVideo: true,
+    },
+    {
+      name: "Sophia Martinez",
+      location: "Sylhet, Bangladesh",
+      rating: 5,
+      comment: "Prompt service and transparent pricing. Will definitely use their service again!",
+      avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80",
+      hasVideo: true,
+    },
+    {
+      name: "Alex Turner",
+      location: "Uttara, Dhaka",
+      rating: 5,
+      comment: "Top notch quality and amazing support. Truly happy with the results.",
+      avatar: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=600&q=80",
+      hasVideo: true,
+    },
+  ];
+
+  const fetchedReviews = rawReviews
     .filter((r: any) => (r.comment || r.content || r.review || "").trim().length > 0)
     .map((r: any) => ({
       name: r.user?.name || "Valued Customer",
@@ -41,26 +124,13 @@ const Testimonials = () => {
       avatar:
         r.user?.profile?.avatar ||
         `https://ui-avatars.com/api/?name=${encodeURIComponent(r.user?.name || "U")}&background=FF7C71&color=fff&size=100`,
+      hasVideo: false,
     }));
 
-  const totalPages = Math.ceil(reviews.length / visibleCount);
-
-  const paginate = useCallback(
-    (dir: number) => {
-      setDirection(dir);
-      setPage((prev) => (prev + dir + totalPages) % totalPages);
-    },
-    [totalPages]
-  );
+  // If fetched reviews are less than 10, append 10 hardcoded items
+  const reviews = fetchedReviews.length >= 10 ? fetchedReviews : [...fetchedReviews, ...dummyReviews];
 
   useEffect(() => { setMounted(true); }, []);
-
-  /* Reset page if visibleCount changes and page is out of range */
-  useEffect(() => {
-    if (page >= totalPages && totalPages > 0) setPage(0);
-  }, [totalPages, page]);
-
-  const visibleReviews = reviews.slice(page * visibleCount, page * visibleCount + visibleCount);
 
   const Header = () => (
     <div className="text-center max-w-3xl mx-auto mb-8 md:mb-14">
@@ -81,7 +151,7 @@ const Testimonials = () => {
   if (!mounted) {
     return (
       <div className="py-5 md:py-8 lg:py-10 relative overflow-hidden bg-transparent">
-        <div className="w-full md:max-w-[92%] lg:max-w-[960px] xl:max-w-[1140px] min-[1440px]:max-w-[1280px] 2xl:max-w-[1400px] mx-auto px-4 md:px-6">
+        <div className="w-full mx-auto px-4 md:px-6">
           <Header />
           <div className="flex justify-center py-12">
             <Loader2 className="w-7 h-7 animate-spin text-[#FF6014]" />
@@ -91,122 +161,110 @@ const Testimonials = () => {
     );
   }
 
-  if (reviews.length === 0 && !isLoading) return null;
-
   return (
-    <div className="py-5 md:py-8 lg:py-10 relative overflow-hidden bg-transparent">
-      <div className="w-full md:max-w-[92%] lg:max-w-[960px] xl:max-w-[1140px] min-[1440px]:max-w-[1280px] 2xl:max-w-[1400px] mx-auto px-4 md:px-6">
+    <div className="py-6 md:py-10 relative overflow-hidden bg-transparent w-full">
+      <div className="w-full mx-auto px-4 md:px-6">
         <Header />
 
-        {isLoading && (
+        {isLoading ? (
           <div className="flex justify-center py-12">
             <Loader2 className="w-7 h-7 animate-spin text-[#FF6014]" />
           </div>
-        )}
+        ) : (
+          <div className="space-y-4 md:space-y-5 overflow-hidden relative">
+            {/* Gradient masks for continuous smooth edges */}
+            <div className="absolute left-0 top-0 bottom-0 w-12 md:w-20 bg-gradient-to-r from-white via-white/80 to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-12 md:w-20 bg-gradient-to-l from-white via-white/80 to-transparent z-10 pointer-events-none" />
 
-        {!isLoading && reviews.length > 0 && (
-          <div className="relative">
-
-            {/* ── Left Arrow ── */}
-            <button
-              onClick={() => paginate(-1)}
-              aria-label="Previous testimonials"
-              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 md:-translate-x-5 z-20 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white border border-blue-200 shadow-md hover:border-blue-500 hover:shadow-blue-100 hover:shadow-lg flex items-center justify-center transition-all duration-200 active:scale-95 cursor-pointer group"
-            >
-              <ChevronLeft className="w-5 h-5 text-slate-600 group-hover:text-blue-600 transition-colors" />
-            </button>
-
-            {/* ── Cards area ── */}
-            <div className="overflow-hidden mx-8 md:mx-10">
-              <AnimatePresence mode="wait" custom={direction}>
-                <motion.div
-                  key={page}
-                  custom={direction}
-                  variants={slideVariants}
-                  initial="enter"
-                  animate="center"
-                  exit="exit"
-                  transition={{ type: "spring", stiffness: 280, damping: 30 }}
-                  className={`grid gap-5 ${visibleCount === 1
-                    ? "grid-cols-1"
-                    : visibleCount === 2
-                      ? "grid-cols-2"
-                      : "grid-cols-3"
-                    }`}
+            {/* Row 1: Right to Left (Scroll Left) */}
+            <div className="flex w-max gap-4 animate-marquee-left hover:[animation-play-state:paused]">
+              {[...reviews, ...reviews, ...reviews].map((review, idx) => (
+                <div
+                  key={`row1-${idx}`}
+                  className="w-[380px] md:w-[430px] flex-shrink-0 bg-white border border-slate-100 rounded-[24px] p-4 flex items-stretch gap-4 shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_25px_rgba(0,0,0,0.09)] transition-all duration-300 h-[185px] md:h-[225px]"
                 >
-                  {visibleReviews.map((review, idx) => (
-                    <div
-                      key={idx}
-                      className="relative bg-white rounded-3xl border border-blue-200 p-7 shadow-sm hover:shadow-lg hover:border-blue-500 hover:shadow-blue-100 transition-all duration-300 flex flex-col min-h-[250px]"
-                    >
-                      {/* Decorative quote mark */}
-                      <span className="absolute top-4 right-6 text-8xl font-serif leading-none select-none pointer-events-none text-[#FF6014]/8">
-                        "
-                      </span>
+                  {/* Left: Image */}
+                  <div className="relative w-[45%] flex-shrink-0 rounded-2xl overflow-hidden bg-slate-100 h-full">
+                    <img
+                      src={review.avatar}
+                      alt={review.name}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = `https://ui-avatars.com/api/?name=${encodeURIComponent(review.name)}&background=FF5A5F&color=fff&size=200`;
+                      }}
+                    />
+                  </div>
 
-                      {/* Stars */}
-                      <div className="flex gap-0.5 mb-4">
+                  {/* Right: Content */}
+                  <div className="w-[55%] flex flex-col justify-between py-1 overflow-hidden">
+                    <div>
+                      {/* Rating Stars */}
+                      <div className="flex gap-1 mb-2">
                         {[...Array(Math.min(review.rating || 5, 5))].map((_, i) => (
-                          <Star key={i} size={15} className="text-amber-400 fill-amber-400" />
+                          <Star key={i} size={13} className="text-amber-400 fill-amber-400" />
                         ))}
                       </div>
 
-                      {/* Comment */}
-                      <p className="text-slate-700 text-[15px] leading-relaxed line-clamp-4 flex-1 mb-6">
-                        "{review.comment}"
+                      {/* Review Comment */}
+                      <p className="text-slate-500 text-xs md:text-[13px] leading-relaxed font-normal line-clamp-4">
+                        {review.comment}
                       </p>
-
-                      {/* Accent line */}
-                      <div className="w-10 h-0.5 bg-[#FF6014]/30 mb-5" />
-
-                      {/* Author */}
-                      <div className="flex items-center gap-3">
-                        <div className="relative flex-shrink-0">
-                          <img
-                            src={review.avatar}
-                            alt={review.name}
-                            className="w-11 h-11 rounded-full object-cover border-2 border-white shadow-md"
-                            onError={(e) => {
-                              (e.target as HTMLImageElement).src = `https://ui-avatars.com/api/?name=${encodeURIComponent(review.name)}&background=FF5A5F&color=fff&size=80`;
-                            }}
-                          />
-                          <div className="absolute -bottom-0.5 -right-0.5 w-4 h-4 bg-emerald-400 rounded-full border-2 border-white" />
-                        </div>
-                        <div>
-                          <h4 className="font-bold text-slate-900 text-sm leading-tight">{review.name}</h4>
-                          <p className="text-xs text-slate-400 font-medium mt-0.5">{review.location}</p>
-                        </div>
-                      </div>
                     </div>
-                  ))}
-                </motion.div>
-              </AnimatePresence>
+
+                    {/* Author Info */}
+                    <div className="mt-2">
+                      <h4 className="font-bold text-slate-800 text-xs md:text-sm leading-tight truncate">{review.name}</h4>
+                      <p className="text-[11px] text-slate-400 font-medium mt-0.5 truncate">{review.location}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
 
-            {/* ── Right Arrow ── */}
-            <button
-              onClick={() => paginate(1)}
-              aria-label="Next testimonials"
-              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 md:translate-x-5 z-20 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white border border-blue-200 shadow-md hover:border-blue-500 hover:shadow-blue-100 hover:shadow-lg flex items-center justify-center transition-all duration-200 active:scale-95 cursor-pointer group"
-            >
-              <ChevronRight className="w-5 h-5 text-slate-600 group-hover:text-blue-600 transition-colors" />
-            </button>
+            {/* Row 2: Left to Right (Scroll Right) */}
+            <div className="flex w-max gap-4 animate-marquee-right hover:[animation-play-state:paused]">
+              {[...reviews, ...reviews, ...reviews].reverse().map((review, idx) => (
+                <div
+                  key={`row2-${idx}`}
+                  className="w-[380px] md:w-[430px] flex-shrink-0 bg-white border border-slate-100 rounded-[24px] p-4 flex items-stretch gap-4 shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_25px_rgba(0,0,0,0.09)] transition-all duration-300 h-[185px] md:h-[225px]"
+                >
+                  {/* Left: Image */}
+                  <div className="relative w-[45%] flex-shrink-0 rounded-2xl overflow-hidden bg-slate-100 h-full">
+                    <img
+                      src={review.avatar}
+                      alt={review.name}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = `https://ui-avatars.com/api/?name=${encodeURIComponent(review.name)}&background=FF5A5F&color=fff&size=200`;
+                      }}
+                    />
+                  </div>
 
-            {/* ── Dot indicators ── */}
-            {totalPages > 1 && (
-              <div className="flex justify-center gap-2 mt-8">
-                {Array.from({ length: totalPages }).map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => { setDirection(i > page ? 1 : -1); setPage(i); }}
-                    aria-label={`Go to page ${i + 1}`}
-                    className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${i === page ? "w-6 bg-blue-500" : "w-2 bg-slate-200 hover:bg-blue-300"
-                      }`}
-                  />
-                ))}
-              </div>
-            )}
+                  {/* Right: Content */}
+                  <div className="w-[55%] flex flex-col justify-between py-1 overflow-hidden">
+                    <div>
+                      {/* Rating Stars */}
+                      <div className="flex gap-1 mb-2">
+                        {[...Array(Math.min(review.rating || 5, 5))].map((_, i) => (
+                          <Star key={i} size={13} className="text-amber-400 fill-amber-400" />
+                        ))}
+                      </div>
 
+                      {/* Review Comment */}
+                      <p className="text-slate-500 text-xs md:text-[13px] leading-relaxed font-normal line-clamp-4">
+                        {review.comment}
+                      </p>
+                    </div>
+
+                    {/* Author Info */}
+                    <div className="mt-2">
+                      <h4 className="font-bold text-slate-800 text-xs md:text-sm leading-tight truncate">{review.name}</h4>
+                      <p className="text-[11px] text-slate-400 font-medium mt-0.5 truncate">{review.location}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         )}
       </div>

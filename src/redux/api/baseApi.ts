@@ -4,6 +4,15 @@ import { getAccessToken, getRefreshToken, setTokens, clearTokens } from '@/lib/t
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://home-services-backend-b6v4.onrender.com";
 
+// Background ping to keep Render backend warm and eliminate 50s cold-start delays
+if (typeof window !== "undefined") {
+  const pingBackend = () => {
+    fetch(`${API_BASE_URL}/category`, { method: "GET", mode: "cors" }).catch(() => { });
+  };
+  pingBackend();
+  setInterval(pingBackend, 4 * 60 * 1000); // Ping every 4 minutes to prevent Render free instance spin-down
+}
+
 const baseQuery = fetchBaseQuery({
   baseUrl: API_BASE_URL,
   prepareHeaders: (headers) => {
@@ -13,6 +22,7 @@ const baseQuery = fetchBaseQuery({
     }
     return headers;
   },
+  timeout: 15000,
 });
 
 const isProtectedRoute = (pathname: string): boolean => {

@@ -116,7 +116,7 @@ export default function DynamicBookingTracker() {
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#FF6014]/5 blur-[120px] rounded-full pointer-events-none -z-10" />
       <div className="absolute bottom-10 right-1/4 w-96 h-96 bg-orange-200/20 blur-[130px] rounded-full pointer-events-none -z-10" />
 
-      <div className="max-w-6xl mx-auto space-y-6">
+      <div className="max-w-9/10 mx-auto space-y-6">
 
         {/* Top Header Row */}
         <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="flex items-center justify-between">

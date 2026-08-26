@@ -40,7 +40,10 @@ import { useGetSavedServicesQuery } from "@/redux/features/admin/user";
 export default function CustomerOverview() {
   const authUser = useAppSelector((state) => state.auth.user);
   const lang = useAppSelector((state) => state.lang.value);
-  const { data: bookingsRes, isLoading: loadingBookings } = useGetAllBookingsQuery();
+  const { data: bookingsRes, isLoading: loadingBookings } = useGetAllBookingsQuery(undefined, {
+    pollingInterval: 3000,
+    refetchOnMountOrArgChange: true,
+  });
   const { data: savedRes } = useGetSavedServicesQuery(undefined, { skip: !authUser });
 
   const allBookings = bookingsRes?.data || [];

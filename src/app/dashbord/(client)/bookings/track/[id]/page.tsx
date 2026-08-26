@@ -14,6 +14,7 @@ import {
   AlertCircle,
   MessageCircle
 } from "lucide-react";
+import { toast } from "sonner";
 
 export default function DynamicBookingTracker() {
   const params = useParams();
@@ -21,8 +22,25 @@ export default function DynamicBookingTracker() {
   const id = params.id as string;
   const lang = useAppSelector((state) => state.lang.value);
 
-  const { data, isLoading, error } = useGetBookingByIdQuery(id);
+  const { data, isLoading, error } = useGetBookingByIdQuery(id, {
+    refetchOnMountOrArgChange: true,
+    pollingInterval: 3000, // Real-time automatic polling every 3 seconds
+  });
   const booking = data?.data;
+
+  const prevStatusRef = React.useRef<string | undefined>(undefined);
+
+  React.useEffect(() => {
+    if (booking?.status && prevStatusRef.current && prevStatusRef.current !== booking.status) {
+      const formattedStatus = booking.status.replace(/_/g, ' ').toUpperCase();
+      toast.success(`Booking Status Updated: ${formattedStatus}`, {
+        description: `Your booking #${booking.id} is now ${formattedStatus}`,
+      });
+    }
+    if (booking?.status) {
+      prevStatusRef.current = booking.status;
+    }
+  }, [booking?.status, booking?.id]);
 
   if (isLoading) {
     return (
@@ -72,18 +90,22 @@ export default function DynamicBookingTracker() {
     },
   ];
 
+  const rawStatus = (booking.status || "").toLowerCase().trim();
+
   // If status is cancelled, we handle it separately
-  const isCancelled = booking.status === "cancelled";
+  const isCancelled = rawStatus === "cancelled";
 
   // Determine current step index
   const statusMap: Record<string, number> = {
     pending: 0,
+    confirmed: 0,
     assigned: 1,
     on_the_way: 2,
-    completed: 3
+    "on the way": 2,
+    completed: 3,
   };
 
-  const currentStepIndex = statusMap[booking.status] ?? 0;
+  const currentStepIndex = statusMap[rawStatus] ?? 0;
 
   return (
     <div className="w-full animate-in fade-in duration-200 pb-10">

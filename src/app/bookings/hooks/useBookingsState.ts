@@ -28,7 +28,11 @@ export const FILTERS: { label: string; value: "all" | BookingStatus }[] = [
 
 export function useBookingsState() {
   const { isAuthenticated, isLoading: isAuthLoading } = useAppSelector((state) => state.auth);
-  const { data: bookingsRes, isLoading: isBookingsLoading } = useGetAllBookingsQuery(undefined, { skip: !isAuthenticated });
+  const { data: bookingsRes, isLoading: isBookingsLoading } = useGetAllBookingsQuery(undefined, {
+    skip: !isAuthenticated,
+    pollingInterval: 3000,
+    refetchOnMountOrArgChange: true,
+  });
   const [updateStatus, { isLoading: isUpdating }] = useUpdateBookingStatusMutation();
   const [deleteBooking, { isLoading: isDeleting }] = useDeleteBookingMutation();
 

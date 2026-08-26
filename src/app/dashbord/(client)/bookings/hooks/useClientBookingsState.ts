@@ -28,7 +28,10 @@ export function useClientBookingsState() {
   const [filter, setFilter] = useState<BookingStatus>("All");
   const [searchQuery, setSearchQuery] = useState("");
 
-  const { data: bookingsRes, isLoading } = useGetAllBookingsQuery();
+  const { data: bookingsRes, isLoading } = useGetAllBookingsQuery(undefined, {
+    pollingInterval: 3000,
+    refetchOnMountOrArgChange: true,
+  });
 
   const allBookings = bookingsRes?.data || [];
   const myBookings = allBookings.filter((b: any) => {

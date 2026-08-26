@@ -195,13 +195,11 @@ export default function Home() {
           </HomeMotionWrapper>
 
           <HomeMotionWrapper>
-            <Testimonials />
+            <FAQ />
           </HomeMotionWrapper>
 
-          {/* <PartnerCta /> */}
-
           <HomeMotionWrapper>
-            <FAQ />
+            <Testimonials />
           </HomeMotionWrapper>
         </div>
       </div>

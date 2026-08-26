@@ -62,7 +62,7 @@ export default function ServiceCard({ service }: { service: ServiceListing }) {
   return (
     <Link
       href={`/services/${service.id}`}
-      className="group bg-white border border-[#FF6014]/20 hover:border-[#FF6014] rounded-3xl overflow-hidden shadow-sm hover:shadow-lg hover:shadow-orange-100/60 no-underline flex flex-col hover-card-premium transition-all duration-300 h-full"
+      className="group bg-white/40 backdrop-blur-xl border border-[#FF6014]/25 hover:border-[#FF6014]/70 hover:bg-white/60 rounded-3xl overflow-hidden shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] hover:shadow-[0_12px_40px_0_rgba(255,96,20,0.15)] no-underline flex flex-col hover-card-premium transition-all duration-300 h-full"
     >
       <div className="relative h-48 overflow-hidden">
         <img

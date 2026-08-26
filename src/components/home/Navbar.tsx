@@ -117,6 +117,7 @@ const LEFT_NAV_LINKS: NavLink[] = [
   { label: "Home", href: "/", icon: HomeIcon },
   { label: "Services", href: "/services", icon: Briefcase, hasDropdown: true },
   { label: "Bookings", href: "/bookings", icon: Calendar },
+  { label: " Map", href: "/map", icon: MapPin },
   { label: "About Us", href: "/about", icon: Info },
   { label: "Contact", href: "/contact", icon: PhoneCall },
   { label: "Opportunity", href: "/opportunity", icon: TrendingUp },
@@ -221,12 +222,12 @@ export function Navbar() {
   const headerShadow = useTransform(
     scrollY,
     [0, 80],
-    ["0 0px 0px rgba(0,0,0,0)", "0 4px 20px -2px rgba(0,0,0,0.06)"]
+    ["0 0px 0px rgba(0,0,0,0)", "0 4px 20px -2px rgba(0,0,0,0.04)"]
   );
   const borderColor = useTransform(
     scrollY,
     [0, 80],
-    ["rgba(226,232,240,0.5)", "rgba(226,232,240,1)"]
+    ["rgba(226,232,240,0.6)", "rgba(226,232,240,0.9)"]
   );
 
   useEffect(() => {
@@ -506,12 +507,16 @@ export function Navbar() {
               </nav>
             </div>
 
-            {/* Desktop & Laptop Search Bar - Aligned to the right next to profile */}
+            {/* Desktop & Laptop Search Bar - Aligned to the right next to profile (Ultra-Premium Glass) */}
             <div
               ref={desktopSearchContainerRef}
               className="hidden md:block w-full max-w-[240px] lg:max-w-[280px] xl:max-w-[320px] ml-auto mr-4 lg:mr-6 relative z-20"
             >
-              <div className="w-full flex items-center bg-slate-50/60 hover:bg-slate-50/80 border border-slate-200/80 focus-within:bg-white focus-within:border-[#FF6014]/50 rounded-full pl-4 pr-3 h-10.5 gap-2.5 shadow-sm hover:shadow transition-all duration-200 focus-within:shadow-[0_4px_20px_-2px_rgba(255,96,20,0.12)]">
+              <div className={`w-full flex items-center bg-white/80 backdrop-blur-xl hover:bg-white border focus-within:bg-white focus-within:border-[#FF6014]/50 rounded-full pl-4 pr-3 h-10.5 gap-2.5 transition-all duration-300 ${
+                isScrolled
+                  ? "border-[#FF6014]/30 shadow-[0_4px_16px_rgba(255,96,20,0.08)]"
+                  : "border-slate-200/80 shadow-2xs hover:border-[#FF6014]/20"
+              }`}>
                 <Search className="w-4 h-4 text-slate-400 group-focus-within:text-[#FF6014] transition-colors flex-shrink-0" aria-hidden="true" />
                 <input
                   id="desktop-search"
@@ -524,7 +529,7 @@ export function Navbar() {
                     setShowSearchResults(true);
                   }}
                   onFocus={() => setShowSearchResults(true)}
-                  className="bg-transparent text-sm text-slate-700 outline-none w-full placeholder-slate-400 font-medium focus:ring-0 border-0 p-0"
+                  className="bg-transparent text-xs sm:text-sm text-slate-700 outline-none w-full placeholder-slate-400 font-semibold focus:ring-0 border-0 p-0"
                 />
 
                 {searchQuery ? (

@@ -12,6 +12,7 @@ import { useBookingsState, STATUS_CONFIG, FILTERS } from "@/app/bookings/hooks/u
 import BookingStats from "@/app/bookings/components/BookingStats";
 import BookingFilters from "@/app/bookings/components/BookingFilters";
 import BookingDetailModal from "@/app/bookings/components/BookingDetailModal";
+import ServiceAreas from "@/components/home/sections/home/ServiceAreas";
 
 const staggerContainer: any = {
   hidden: { opacity: 0 },
@@ -170,6 +171,9 @@ export default function BookingsPage() {
       </div>
 
       <BookingDetailModal selectedBooking={selectedBooking} onClose={() => setSelectedBooking(null)} onCancel={handleCancel} onDelete={handleDelete} isUpdating={isUpdating} isDeleting={isDeleting} />
+
+      {/* Coverage Map Section */}
+      <ServiceAreas />
     </section>
   );
 }

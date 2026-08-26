@@ -134,16 +134,16 @@ const Testimonials = () => {
 
   const Header = () => (
     <div className="text-center max-w-3xl mx-auto mb-8 md:mb-14">
-      <div className="inline-flex items-center gap-2 bg-[#FF6014]/10 border border-[#FF6014]/20 text-[#FF6014] px-3.5 py-1.5 rounded-full text-xs font-bold mb-3">
+      <div className="inline-flex items-center gap-2 bg-[#FFF4EE] border border-[#FF6014]/25 text-[#FF6014] px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-3 shadow-2xs">
         <MessageSquare size={13} />
         Customer Reviews
       </div>
-      <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold text-slate-900 tracking-tight leading-tight flex items-center justify-center gap-2">
+      <h2 className="text-xl md:text-2xl lg:text-3xl font-medium text-slate-900 tracking-tight leading-tight flex items-center justify-center gap-2">
         <MessageSquare className="w-5 h-5 md:w-6 md:h-6 text-[#FF6014]" />
-        What our clients <span className="text-[#FF6014]">say about us</span>
+        What Our Clients <span className="text-[#FF6014]">Say About Us</span>
       </h2>
-      <p className="mt-3 text-slate-500 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
-        Trusted by thousands of happy homes across Bangladesh.
+      <p className="mt-3 text-slate-500 text-sm md:text-base font-medium max-w-2xl mx-auto leading-relaxed">
+        Trusted by thousands of happy households across Bangladesh.
       </p>
     </div>
   );

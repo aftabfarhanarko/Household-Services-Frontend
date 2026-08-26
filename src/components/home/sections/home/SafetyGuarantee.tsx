@@ -50,23 +50,23 @@ export default function SafetyGuarantee() {
           </p>
         </div>
 
-          {/* Grid Cards */}
+          {/* Grid Cards (Glassmorphism design) */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 relative z-10">
             {GUARANTEES.map((item, index) => {
               const Icon = item.icon;
               return (
                 <motion.div
                   key={index}
-                  whileHover={{ y: -4 }}
+                  whileHover={{ y: -6, scale: 1.02 }}
                   transition={{ duration: 0.2 }}
-                  className="bg-white/90 backdrop-blur-md rounded-2xl p-5 border border-[#FF6014]/20 hover:border-[#FF6014] shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between group"
+                  className="bg-white/40 backdrop-blur-xl rounded-2xl p-5 border border-white/60 shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] hover:shadow-[0_12px_40px_0_rgba(255,96,20,0.15)] hover:border-[#FF6014]/40 hover:bg-white/60 transition-all duration-300 flex flex-col justify-between group"
                 >
                   <div>
                     <div className="flex items-center justify-between mb-4">
-                      <div className="w-12 h-12 rounded-xl bg-[#FFF4EE] border border-[#FF6014]/30 flex items-center justify-center text-[#FF6014] group-hover:bg-[#FF6014] group-hover:text-white transition-colors duration-300">
+                      <div className="w-12 h-12 rounded-xl bg-white/70 backdrop-blur-md border border-[#FF6014]/20 flex items-center justify-center text-[#FF6014] group-hover:bg-[#FF6014] group-hover:text-white transition-all duration-300 shadow-sm">
                         <Icon className="w-6 h-6" />
                       </div>
-                      <span className="text-[10px] font-bold text-[#FF6014] bg-[#FFF4EE] px-2.5 py-1 rounded-full border border-[#FF6014]/15">
+                      <span className="text-[10px] font-bold text-[#FF6014] bg-[#FF6014]/10 backdrop-blur-md px-2.5 py-1 rounded-full border border-[#FF6014]/20">
                         {item.badge}
                       </span>
                     </div>
@@ -79,25 +79,13 @@ export default function SafetyGuarantee() {
                     </p>
                   </div>
 
-                  <div className="mt-4 pt-3 border-t border-slate-100 flex items-center gap-1.5 text-[11px] font-bold text-emerald-600">
+                  <div className="mt-4 pt-3 border-t border-slate-200/50 flex items-center gap-1.5 text-[11px] font-bold text-emerald-600">
                     <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
                     <span>Verified Guarantee</span>
                   </div>
                 </motion.div>
               );
             })}
-          </div>
-
-          {/* Bottom Trust Line */}
-          <div className="mt-8 pt-6 border-t border-[#FF6014]/15 flex flex-wrap items-center justify-between gap-4 text-xs font-semibold text-slate-700 relative z-10">
-            <div className="flex items-center gap-2">
-              <ThumbsUp className="w-4 h-4 text-[#FF6014]" />
-              <span>Over <strong className="text-slate-900">50,000+</strong> happy households trust Rajseba for home maintenance</span>
-            </div>
-            <div className="flex items-center gap-4 text-slate-500 text-[11px] font-bold">
-              <span>✓ Instant Free Cancellation</span>
-              <span>✓ 24/7 Priority Support</span>
-            </div>
           </div>
 
       </div>

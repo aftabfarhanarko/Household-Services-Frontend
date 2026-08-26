@@ -29,10 +29,10 @@ export function PackageOfferCard({
       variants={itemVariants}
       whileHover={{ y: -8, scale: 1.015 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
-      className={`group rounded-3xl relative flex flex-col h-full overflow-hidden backdrop-blur-xl backdrop-saturate-150 border-2 transition-all duration-300 ${
+      className={`group rounded-3xl relative flex flex-col h-full overflow-hidden backdrop-blur-xl border transition-all duration-300 ${
         isPopular
-          ? "bg-white/85 border-[#FF6014] shadow-xl shadow-[#FF6014]/15 ring-2 ring-[#FF6014]/30 hover:border-[#FF6014] hover:shadow-2xl hover:shadow-[#FF6014]/25"
-          : "bg-white/70 border-[#FF6014]/60 hover:border-[#FF6014] hover:bg-white/90 shadow-lg shadow-orange-950/[0.03] hover:shadow-2xl hover:shadow-[#FF6014]/20"
+          ? "bg-white/50 border-[#FF6014]/60 shadow-[0_12px_40px_0_rgba(255,96,20,0.18)] ring-2 ring-[#FF6014]/30 hover:bg-white/70 hover:border-[#FF6014]"
+          : "bg-white/40 border-white/60 shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] hover:bg-white/60 hover:border-[#FF6014]/60 hover:shadow-[0_12px_40px_0_rgba(255,96,20,0.15)]"
       }`}
     >
       {/* Glass Shimmer Overlay on Hover */}

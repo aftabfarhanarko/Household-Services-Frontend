@@ -11,6 +11,7 @@ import {
   PILLARS, SERVICES_COVERED, RevealSection,
   fadeLeft, fadeRight, fadeUp, stagger
 } from "@/app/about/components/AboutComponents";
+import ServiceAreas from "@/components/home/sections/home/ServiceAreas";
 
 export default function AboutClientPage() {
   const { displayStats, teamMembers } = useAboutState();
@@ -146,6 +147,9 @@ export default function AboutClientPage() {
           </RevealSection>
         </div>
       </section>
+
+      {/* COVERAGE MAP — ServiceAreas Component */}
+      <ServiceAreas />
 
       {/* TEAM */}
       <section className="py-8 md:py-14 bg-transparent">

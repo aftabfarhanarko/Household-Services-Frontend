@@ -9,6 +9,7 @@ import {
   Globe, ShieldCheck, CheckCircle2
 } from "lucide-react";
 import { useOpportunityState, vendorBenefits, agentBenefits } from "@/app/opportunity/hooks/useOpportunityState";
+import ServiceAreas from "@/components/home/sections/home/ServiceAreas";
 
 function OpportunityPageContent() {
   const searchParams = useSearchParams();

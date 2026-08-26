@@ -53,7 +53,7 @@ export default function SidebarList({
   }, []);
 
   return (
-    <div className="w-full md:w-[380px] bg-white border border-slate-200 rounded-3xl flex flex-col h-auto md:h-full md:max-h-none z-10 shadow-md overflow-hidden shrink-0">
+    <div className="w-full bg-white/40 backdrop-blur-xl border border-white/60 rounded-3xl flex flex-col h-full z-10 shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] overflow-hidden shrink-0">
       {/* Sidebar Header Filters */}
       <div className="p-4 border-b border-slate-100 space-y-4">
         {/* Search Bar */}
@@ -125,7 +125,7 @@ export default function SidebarList({
       </div>
 
       {/* Sidebar List Content */}
-      <div className="hidden md:flex flex-col flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50/50 custom-scrollbar">
+      <div className="flex flex-col flex-1 overflow-y-auto p-3.5 md:p-4 space-y-3.5 md:space-y-4 bg-slate-50/30 custom-scrollbar max-h-[420px] md:max-h-none">
         <h3 className="text-sm font-extrabold text-slate-800 tracking-wide uppercase px-1">
           Nearby Professionals ({filteredExperts.length})
         </h3>
@@ -143,10 +143,10 @@ export default function SidebarList({
               <div
                 key={expert.id}
                 onClick={() => setSelectedExpertId(expert.id)}
-                className={`p-4 rounded-2xl border transition-all duration-300 cursor-pointer flex flex-col justify-between relative bg-white ${
+                className={`p-4 rounded-2xl border transition-all duration-300 cursor-pointer flex flex-col justify-between relative ${
                   isSelected
-                    ? "border-[#FF6014] shadow-[0_8px_30px_rgb(255,90,95,0.06)] ring-1 ring-red-100"
-                    : "border-slate-100 hover:border-slate-300 shadow-sm"
+                    ? "bg-white/80 backdrop-blur-xl border-[#FF6014] shadow-[0_8px_30px_rgba(255,96,20,0.12)] ring-1 ring-[#FF6014]/30"
+                    : "bg-white/50 backdrop-blur-md border-white/70 hover:bg-white/80 hover:border-[#FF6014]/40 hover:shadow-[0_6px_20px_rgba(255,96,20,0.08)] shadow-2xs"
                 }`}
               >
                 {/* Rating floating badge */}

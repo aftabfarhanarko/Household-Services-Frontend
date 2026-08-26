@@ -88,11 +88,13 @@ export default function WhyChooseUs() {
                   flex flex-col items-center justify-center
                   text-center h-full
                   rounded-2xl sm:rounded-[32px] p-3 sm:p-6 lg:p-8
-                  bg-gradient-to-br from-white to-[#e8eaed]
-                  border-[2px] border-[#FF6014]/30
+                  bg-white/40 backdrop-blur-xl
+                  border border-white/60
+                  shadow-[0_8px_32px_0_rgba(31,38,135,0.07)]
                   cursor-default
                   transition-all duration-300
-                  hover:border-[#FF6014]/80 hover:shadow-[0_8px_30px_rgba(255,96,20,0.25)]
+                  hover:bg-white/60 hover:border-[#FF6014]/40 hover:shadow-[0_12px_40px_0_rgba(255,96,20,0.15)]
+                  hover:-translate-y-1
                 "
               >
                 {/* Top gloss sheen */}
@@ -111,12 +113,11 @@ export default function WhyChooseUs() {
                     relative overflow-hidden
                     w-12 h-12 sm:w-20 sm:h-20 rounded-full mb-4 sm:mb-8
                     flex items-center justify-center
-                    bg-gradient-to-br from-[#f5f7fa] to-[#e8eaed]
-                    shadow-[2px_2px_5px_rgba(174,180,190,0.35),_-2px_-2px_5px_rgba(255,255,255,1)]
-                    sm:shadow-[4px_4px_10px_rgba(174,180,190,0.5),_-4px_-4px_10px_rgba(255,255,255,1)]
+                    bg-white/70 backdrop-blur-md border border-[#FF6014]/20
+                    shadow-sm
                     transition-all duration-300
-                    group-hover:from-[#FF6014] group-hover:to-[#E0530A]
-                    group-hover:shadow-[4px_4px_14px_rgba(255,96,20,0.35),_-3px_-3px_10px_rgba(255,220,200,0.6)]
+                    group-hover:bg-[#FF6014] group-hover:border-[#FF6014]
+                    group-hover:shadow-[0_8px_20px_rgba(255,96,20,0.35)]
                   "
                 >
                   {/* Orb inner gloss */}
@@ -132,7 +133,7 @@ export default function WhyChooseUs() {
                   <IconComponent
                     className="
                       w-5 h-5 sm:w-8 sm:h-8 relative z-10
-                      text-primary
+                      text-[#FF6014]
                       transition-colors duration-300
                       group-hover:text-white
                     "
@@ -142,7 +143,7 @@ export default function WhyChooseUs() {
                 <h3 className="font-extrabold text-slate-900 text-xs sm:text-base md:text-xl mb-1.5 sm:mb-3">
                   {feature.title}
                 </h3>
-                <p className="text-[10px] sm:text-xs md:text-sm text-slate-400 font-semibold sm:font-medium leading-relaxed max-w-xs mx-auto">
+                <p className="text-[10px] sm:text-xs md:text-sm text-slate-500 font-semibold sm:font-medium leading-relaxed max-w-xs mx-auto">
                   {feature.description}
                 </p>
               </motion.div>

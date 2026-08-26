@@ -165,13 +165,14 @@ const ExploreCategories = () => {
                         flex flex-col items-center justify-center
                         min-h-[110px] sm:min-h-[130px] md:min-h-[185px] lg:min-h-[200px]
                         rounded-2xl md:rounded-[24px] p-2.5 md:p-6 lg:p-7
-                        bg-gradient-to-br from-white to-[#e8eaed]
-                        border border-[#FF6014]/20 hover:border-[#FF6014]/70
+                        bg-white/40 backdrop-blur-xl
+                        border border-[#FF6014]/25
+                        shadow-[0_8px_32px_0_rgba(31,38,135,0.07)]
                         cursor-pointer
                         transition-all duration-350 ease-out
+                        hover:bg-white/60 hover:border-[#FF6014]/70
                         hover:shadow-[0_12px_28px_rgba(255,96,20,0.15),0_0_0_3px_rgba(255,96,20,0.1)]
                         hover:-translate-y-[3px]
-                        category-card-blue-animated
                       "
                     >
                       {/* Gloss sheen */}

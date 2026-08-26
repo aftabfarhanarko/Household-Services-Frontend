@@ -52,100 +52,106 @@ export default function ComparisonSection() {
           </p>
         </div>
 
-        {/* Comparison Wrapper */}
-        <div className="bg-white rounded-3xl border border-[#FF6014]/20 shadow-[0_8px_30px_rgba(255,96,20,0.06)] overflow-hidden">
+        {/* Side-by-Side Layout: Generated Illustration Image (Left) & Glassmorphism Comparison (Right) */}
+        <div className="grid lg:grid-cols-12 gap-8 items-center">
           
-          {/* Desktop & Tablet View (Table Layout) */}
-          <div className="hidden sm:block">
-            {/* Table Header */}
-            <div className="grid grid-cols-12 bg-[#FFF8F4] border-b border-[#FF6014]/15 p-4 text-xs md:text-sm font-extrabold items-center">
-              <div className="col-span-4 pl-3 text-slate-800 uppercase tracking-wider">Features & Guarantees</div>
-              <div className="col-span-4 text-center text-[#FF6014] bg-[#FF6014]/10 py-2 rounded-xl border border-[#FF6014]/20 flex items-center justify-center gap-1.5">
-                <ShieldCheck className="w-4 h-4 text-[#FF6014]" /> Rajseba Standard
-              </div>
-              <div className="col-span-4 text-center text-slate-500 uppercase tracking-wider">
-                Unorganized Local Technicians
+          {/* Left Column: Image with website primary orange accents */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="lg:col-span-5 relative group"
+          >
+            <div className="relative rounded-3xl overflow-hidden border border-white/60 shadow-[0_12px_40px_0_rgba(255,96,20,0.15)] bg-gradient-to-b from-[#FFF4EE] to-white p-2">
+              <img
+                src="/rajseba-standard.png"
+                alt="Rajseba Quality Standard Verified Technician"
+                className="w-full h-auto rounded-2xl object-cover transform group-hover:scale-105 transition-transform duration-500"
+              />
+              
+              {/* Glassmorphism Badge overlay on image */}
+              <div className="absolute bottom-6 left-6 right-6 bg-white/70 backdrop-blur-md p-3.5 rounded-xl border border-white/80 shadow-lg flex items-center gap-3">
+                <div className="w-10 h-10 rounded-lg bg-[#FF6014] text-white flex items-center justify-center font-extrabold shrink-0">
+                  <ShieldCheck size={20} />
+                </div>
+                <div>
+                  <h4 className="font-extrabold text-slate-900 text-xs">100% Verified Quality</h4>
+                  <p className="text-[11px] font-medium text-slate-500">Rajseba Certified Standard</p>
+                </div>
               </div>
             </div>
+          </motion.div>
 
-            {/* Rows */}
-            <div className="divide-y divide-slate-100">
-              {COMPARISONS.map((item, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 8 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.04 }}
-                  className="grid grid-cols-12 p-4 text-xs md:text-sm items-center hover:bg-slate-50/80 transition-colors"
+          {/* Right Column: Glassmorphism Comparison Table */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="lg:col-span-7"
+          >
+            <div className="bg-white/40 backdrop-blur-xl rounded-3xl border border-white/60 shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] overflow-hidden">
+              
+              {/* Table Header (Clean style without orange background box) */}
+              <div className="grid grid-cols-12 bg-white/50 backdrop-blur-md border-b border-white/60 p-3.5 text-xs font-extrabold items-center">
+                <div className="col-span-5 pl-2 text-slate-800 uppercase tracking-wider">Features</div>
+                <div className="col-span-4 text-center text-[#FF6014] font-black uppercase tracking-wider flex items-center justify-center gap-1">
+                  <ShieldCheck className="w-4 h-4 text-[#FF6014]" /> Rajseba
+                </div>
+                <div className="col-span-3 text-center text-slate-500 text-[11px] uppercase tracking-wider">
+                  Local
+                </div>
+              </div>
+
+              {/* Rows with staggered entrance animation (one by one delay) */}
+              <div className="divide-y divide-white/50">
+                {COMPARISONS.map((item, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: 0.2 + i * 0.12, ease: "easeOut" }}
+                    className="grid grid-cols-12 p-3 text-xs md:text-sm items-center hover:bg-white/60 backdrop-blur-sm transition-all"
+                  >
+                    {/* Feature Title */}
+                    <div className="col-span-5 font-bold text-slate-800 flex items-center gap-2 pl-2">
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#FF6014] shrink-0" />
+                      <span className="text-xs">{item.feature}</span>
+                    </div>
+
+                    {/* Rajseba Side (Clean text with green checkmark - background box removed) */}
+                    <div className="col-span-4 text-left md:text-center font-bold flex items-center justify-start md:justify-center gap-1.5 px-2">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                      <span className="leading-tight text-xs font-extrabold text-slate-800">{item.rajseba}</span>
+                    </div>
+
+                    {/* Local Side */}
+                    <div className="col-span-3 text-center text-slate-500 font-semibold p-1.5 flex items-center justify-center gap-1">
+                      <XCircle className="w-3.5 h-3.5 text-rose-500 shrink-0" />
+                      <span className="leading-tight text-[11px] text-rose-600/90 truncate">{item.local}</span>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Bottom Action Footer */}
+              <div className="p-3.5 bg-white/40 backdrop-blur-md border-t border-white/60 flex items-center justify-between gap-2">
+                <div className="text-[11px] font-bold text-slate-700">
+                  ⚡ Experience hassle-free service today.
+                </div>
+                <Link
+                  href="/services"
+                  className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-[#FF6014] hover:bg-[#E0530A] text-white text-xs font-extrabold transition-all shadow-md hover:shadow-lg active:scale-95 cursor-pointer shrink-0"
                 >
-                  {/* Feature Title */}
-                  <div className="col-span-4 font-bold text-slate-800 flex items-center gap-2.5 pl-3">
-                    <div className="w-2 h-2 rounded-full bg-[#FF6014]" />
-                    <span>{item.feature}</span>
-                  </div>
-
-                  {/* Rajseba Side */}
-                  <div className="col-span-4 text-center font-bold text-slate-900 bg-[#FFF4EE] border border-[#FF6014]/30 rounded-xl p-2.5 mx-2 flex items-center justify-center gap-2 text-emerald-800 shadow-sm">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                    <span className="leading-tight text-xs font-bold">{item.rajseba}</span>
-                  </div>
-
-                  {/* Local Side */}
-                  <div className="col-span-4 text-center text-slate-500 font-semibold p-2.5 flex items-center justify-center gap-2">
-                    <XCircle className="w-4 h-4 text-rose-500 shrink-0" />
-                    <span className="leading-tight text-xs text-rose-600/90">{item.local}</span>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          {/* Mobile View (Card List Stacked Layout) */}
-          <div className="sm:hidden p-4 space-y-4 divide-y divide-slate-100">
-            {COMPARISONS.map((item, i) => (
-              <div key={i} className={i > 0 ? "pt-4" : ""}>
-                <div className="flex items-center gap-2 mb-2">
-                  <div className="w-2 h-2 rounded-full bg-[#FF6014]" />
-                  <span className="font-extrabold text-slate-900 text-xs uppercase tracking-wider">{item.feature}</span>
-                </div>
-
-                <div className="space-y-2">
-                  {/* Rajseba Box */}
-                  <div className="bg-[#FFF4EE] border border-[#FF6014]/30 rounded-xl p-2.5 flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                    <div>
-                      <span className="text-[10px] font-black text-[#FF6014] uppercase tracking-wider block">Rajseba</span>
-                      <span className="text-xs font-bold text-slate-800 leading-tight">{item.rajseba}</span>
-                    </div>
-                  </div>
-
-                  {/* Local Box */}
-                  <div className="bg-slate-50 border border-slate-200/80 rounded-xl p-2.5 flex items-center gap-2">
-                    <XCircle className="w-4 h-4 text-rose-500 shrink-0" />
-                    <div>
-                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Local Technicians</span>
-                      <span className="text-xs font-semibold text-rose-600/90 leading-tight">{item.local}</span>
-                    </div>
-                  </div>
-                </div>
+                  <span>Explore Services</span>
+                  <ArrowRight size={13} />
+                </Link>
               </div>
-            ))}
-          </div>
 
-          {/* Bottom Action Footer */}
-          <div className="p-4 md:p-5 bg-gradient-to-r from-[#FFF8F4] to-white border-t border-[#FF6014]/15 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
-            <div className="text-xs font-bold text-slate-700">
-              ⚡ Experience hassle-free home maintenance with verified professionals today.
             </div>
-            <Link
-              href="/services"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-[#FF6014] hover:bg-[#E0530A] text-white text-xs font-extrabold transition-all shadow-md hover:shadow-lg active:scale-95 cursor-pointer"
-            >
-              <span>Explore All Services</span>
-              <ArrowRight size={14} />
-            </Link>
-          </div>
+          </motion.div>
 
         </div>
 

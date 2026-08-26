@@ -192,7 +192,7 @@ export default function TopServices() {
                 key={service.id}
                 variants={cardVariants}
                 transition={{ duration: 0.5, delay: i * 0.15, ease: "easeOut" }}
-                className="bg-white rounded-3xl overflow-hidden border border-[#FF6014]/20 group flex flex-col h-full hover-card-premium transition-all duration-300 hover:border-[#FF6014]/80 hover:shadow-[#FF6014]/20 hover:shadow-xl"
+                className="bg-white/40 backdrop-blur-xl rounded-3xl overflow-hidden border border-[#FF6014]/25 shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] group flex flex-col h-full hover-card-premium transition-all duration-300 hover:bg-white/60 hover:border-[#FF6014]/70 hover:shadow-[0_12px_40px_0_rgba(255,96,20,0.15)]"
               >
                 {/* ── Illustration or image ── */}
                 <div className="relative">
@@ -243,7 +243,7 @@ export default function TopServices() {
                 </div>
 
                 {/* ── Text + CTA ── */}
-                <div className="p-5 flex flex-col flex-1 justify-between bg-white">
+                <div className="p-5 flex flex-col flex-1 justify-between bg-transparent">
                   <div className="space-y-1">
                     <div className="flex justify-between items-start gap-2">
                       <h3 className="font-extrabold text-slate-900 text-base leading-snug tracking-tight">

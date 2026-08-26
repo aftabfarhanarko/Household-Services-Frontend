@@ -9,6 +9,7 @@ import {
   ContactChannelsList, TRUST_BARS, FAQS, SocialLinksBar, OFFICE_HOURS, RevealSection
 } from "@/app/contact/components/ContactComponents";
 import { ContactForm } from "@/app/contact/components/ContactForm";
+import ServiceAreas from "@/components/home/sections/home/ServiceAreas";
 
 export default function ContactClientPage() {
   const { form, errors, submitted, setSubmitted, activeFaq, setActiveFaq, isLoading, heroRef, glowY, glowY2, handleChange, handleSubmit } = useContactState();
@@ -131,6 +132,9 @@ export default function ContactClientPage() {
           </RevealSection>
         </div>
       </section>
+
+      {/* Coverage Map Section */}
+      <ServiceAreas />
     </div>
   );
 }

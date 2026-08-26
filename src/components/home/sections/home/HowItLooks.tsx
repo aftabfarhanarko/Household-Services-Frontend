@@ -22,8 +22,8 @@ export default function HowItLooks() {
     <section className="py-5 md:py-8 lg:py-10 relative overflow-hidden">
       <div className="w-full md:max-w-[92%] lg:max-w-[960px] xl:max-w-[1140px] min-[1440px]:max-w-[1280px] 2xl:max-w-[1400px] mx-auto px-4 md:px-6 relative z-10">
 
-        {/* Outer Transparent Container with Primary Orange Accent Border */}
-        <div className="bg-white rounded-3xl overflow-hidden border border-[#FF6014]/20 shadow-[0_8px_30px_rgba(255,96,20,0.06)] grid lg:grid-cols-12 items-center">
+        {/* Outer Glassmorphism Container */}
+        <div className="bg-white/40 backdrop-blur-xl rounded-3xl overflow-hidden border border-white/60 shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] grid lg:grid-cols-12 items-center">
           
           {/* Left Column: Visual Showcase Card / Embedded Video */}
           <div className="lg:col-span-6 relative h-[280px] sm:h-[360px] lg:h-[420px] overflow-hidden bg-slate-950 group">

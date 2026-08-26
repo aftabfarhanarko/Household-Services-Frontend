@@ -14,7 +14,7 @@ interface ExpertCardProps {
 
 export default function ExpertCard({ expert, onViewDetails }: ExpertCardProps) {
   return (
-    <div className="bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-[0_8px_30px_rgba(0,0,0,0.02)] transition-shadow p-6 md:p-8 flex flex-col md:flex-row justify-between gap-6 relative">
+    <div className="bg-white/40 backdrop-blur-xl rounded-3xl border border-white/60 shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] hover:bg-white/60 hover:border-[#FF6014]/60 hover:shadow-[0_12px_40px_0_rgba(255,96,20,0.15)] transition-all duration-300 p-6 md:p-8 flex flex-col md:flex-row justify-between gap-6 relative">
       <div className="flex-1 space-y-4">
         <div className="flex items-start gap-4">
           {expert.avatar ? (

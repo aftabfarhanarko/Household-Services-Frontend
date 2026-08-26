@@ -202,8 +202,8 @@ const Hero = () => {
   }
 
   return (
-    <div className="w-full max-w-full md:max-w-[92%] lg:max-w-[960px] xl:max-w-[1140px] min-[1440px]:max-w-[1280px] 2xl:max-w-[1400px] mx-auto px-0 md:px-6 pt-0 md:pt-[3px]">
-      <div className="relative w-full aspect-[16/9.5] md:aspect-auto md:min-h-[45vh] lg:min-h-[50vh] mt-0 md:mt-0 flex items-center rounded-none md:rounded-[26px] overflow-hidden justify-center py-0 md:py-0">
+    <div className="w-full max-w-full md:max-w-[92%] lg:max-w-[960px] xl:max-w-[1140px] min-[1440px]:max-w-[1280px] 2xl:max-w-[1400px] mx-auto px-0 md:px-6 pt-0 md:pt-4">
+      <div className="relative w-full aspect-[16/9.5] md:aspect-auto md:min-h-[46vh] lg:min-h-[52vh] flex items-center rounded-none md:rounded-2xl overflow-hidden justify-center border-0 md:border border-white/70 shadow-none md:shadow-[0_12px_45px_0_rgba(0,0,0,0.08),0_0_0_1px_rgba(255,96,20,0.15)] bg-white/40 backdrop-blur-xl">
         {isImageLoading && !hasInitialLoaded && (
           <div className="absolute inset-0 z-[5] flex items-center justify-center bg-white/20 backdrop-blur-[2px]">
             <Loader2 className="w-8 h-8 animate-spin text-[#FF6014]" />
@@ -238,7 +238,7 @@ const Hero = () => {
                       paginate(-1);
                     }
                   }}
-                  className={`absolute inset-0 w-full h-full object-fill md:object-cover ${activeSlide?.hero?.link ? "cursor-pointer" : ""
+                  className={`absolute inset-0 w-full h-full object-cover ${activeSlide?.hero?.link ? "cursor-pointer" : ""
                     }`}
                   onClick={handleSlideClick}
                   loading="eager"
@@ -259,22 +259,20 @@ const Hero = () => {
           className="relative z-10 w-full max-w-full md:max-w-[92%] lg:max-w-[960px] xl:max-w-[1140px] min-[1440px]:max-w-[1280px] 2xl:max-w-[1400px] mx-auto px-4 md:px-6 text-center"
         >
 
-
-
         </motion.div>
 
-        {/* Slide Indicators */}
+        {/* Slide Indicators - Ultra-Premium Light Glass Pill */}
         {slides.length > 1 && (
-          <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-20 flex gap-1.5 items-center justify-center">
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex gap-2 items-center justify-center bg-white/40 backdrop-blur-xl px-3.5 py-2 rounded-full border border-white/60 shadow-[0_4px_20px_rgba(0,0,0,0.08)]">
             {slides.map((_, index) => {
               const isActive = index === currentSlideIndex;
               return (
                 <button
                   key={index}
                   onClick={() => handleIndicatorClick(index)}
-                  className={`h-1.5 rounded-full transition-all duration-300 ${isActive
-                    ? "w-7 bg-white shadow-sm"
-                    : "w-2.5 bg-white/40 hover:bg-white/60"
+                  className={`h-2 rounded-full transition-all duration-300 ${isActive
+                    ? "w-7 bg-[#FF6014] shadow-[0_0_12px_rgba(255,96,20,0.8)]"
+                    : "w-2 bg-slate-400/60 hover:bg-slate-700"
                     }`}
                   aria-label={`Go to slide ${index + 1}`}
                 />

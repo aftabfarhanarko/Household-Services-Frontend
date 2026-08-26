@@ -108,6 +108,7 @@ export function useAgentState() {
       name: formData.get("name"),
       email: formData.get("email"),
       phone: formData.get("phone"),
+      password: formData.get("password"),
       roleId: Number(agentRole.id || agentRole._id),
     };
 

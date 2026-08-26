@@ -93,7 +93,8 @@ export function useUserState() {
     const data: any = {
       name: formData.get("name"),
       email: formData.get("email"),
-      phone: formData.get("phone"),
+      phone: formData.get("phone") || undefined,
+      password: formData.get("password"),
       roleId: Number(formData.get("role")),
     };
     if (role === "vendor") {

@@ -332,13 +332,9 @@ export default function Footer() {
             <span className="text-slate-300 hidden sm:inline">|</span>
             <span>
               Developed by{" "}
-              <Link
-                href="https://www.jevxo.com"
-                target="_blank"
-                className="text-[#FF6014] font-semibold hover:underline"
-              >
-                Jevxo
-              </Link>
+              <span className="text-[#FF6014] font-semibold">
+                Aftabfarhan Arko
+              </span>
             </span>
             <span className="text-slate-300 hidden sm:inline">|</span>
             <Link href="/privacy" className="hover:text-[#FF6014] transition-colors">

@@ -15,6 +15,11 @@ import {
   Mail,
   Eye,
   EyeOff,
+  Zap,
+  Store,
+  Briefcase,
+  User,
+  Users,
 } from "lucide-react";
 import { useLoginState } from "@/app/login/hooks/useLoginState";
 import LoginLeftPanel from "@/app/login/components/LoginLeftPanel";
@@ -96,6 +101,66 @@ export default function LoginPage() {
               <p className="text-slate-400 text-xs font-semibold mt-2 leading-relaxed max-w-xs">
                 Enter your email address and password to sign in.
               </p>
+            </div>
+
+            {/* Quick Demo Credentials */}
+            <div className="mb-6 p-4 rounded-2xl bg-slate-50/90 border border-slate-200/80 shadow-2xs">
+              <div className="flex items-center gap-1.5 text-[11px] font-black text-slate-600 uppercase tracking-wider mb-3">
+                <Zap size={14} className="text-[#FF6014] fill-[#FF6014]" />
+                <span>Quick Demo Accounts (ক্লিক করে অটো ফিল করুন)</span>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {[
+                  {
+                    role: "Super Admin",
+                    email: "aftabfarhan324@gmail.com",
+                    pass: "123456",
+                    icon: <ShieldCheck size={13} />,
+                    color: "bg-rose-50 text-rose-700 border-rose-200 hover:bg-rose-100",
+                  },
+                  {
+                    role: "Vendor",
+                    email: "vendor@gmail.com",
+                    pass: "123456",
+                    icon: <Store size={13} />,
+                    color: "bg-orange-50 text-orange-700 border-orange-200 hover:bg-orange-100",
+                  },
+                  {
+                    role: "Agent",
+                    email: "agent@gmail.com",
+                    pass: "123456",
+                    icon: <Briefcase size={13} />,
+                    color: "bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100",
+                  },
+                  {
+                    role: "Client",
+                    email: "client@gmail.com",
+                    pass: "123456",
+                    icon: <User size={13} />,
+                    color: "bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-100",
+                  },
+                  {
+                    role: "Employee",
+                    email: "employ@example.com",
+                    pass: "123456",
+                    icon: <Users size={13} />,
+                    color: "bg-purple-50 text-purple-700 border-purple-200 hover:bg-purple-100",
+                  },
+                ].map((item) => (
+                  <button
+                    key={item.role}
+                    type="button"
+                    onClick={() => {
+                      setEmail(item.email);
+                      setPassword(item.pass);
+                    }}
+                    className={`px-3 py-1.5 rounded-xl text-xs font-bold border transition-all flex items-center gap-1.5 hover:scale-[1.03] active:scale-[0.98] cursor-pointer shadow-2xs ${item.color}`}
+                  >
+                    {item.icon}
+                    <span>{item.role}</span>
+                  </button>
+                ))}
+              </div>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -241,14 +306,9 @@ export default function LoginPage() {
           </div>
           <div>
             Developed by{" "}
-            <a
-              href="https://jevxo.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#FF6014] hover:underline font-semibold"
-            >
-              Jevxo
-            </a>
+            <span className="text-[#FF6014] font-semibold">
+              Aftabfarhan Arko
+            </span>
           </div>
         </div>
       </div>

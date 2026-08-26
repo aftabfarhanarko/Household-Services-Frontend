@@ -92,38 +92,52 @@ export default function RegisterPage() {
           }}
         />
 
-        <div className="relative z-10 px-5 sm:px-8 pt-5">
+        <div className="relative z-10 px-6 sm:px-10 pt-6">
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-500 hover:text-[#FF6014] transition-colors group"
+            className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-slate-400 hover:text-[#FF6014] transition-colors group"
           >
             <ChevronLeft
-              size={17}
+              size={16}
               className="group-hover:-translate-x-0.5 transition-transform"
             />
             Back to Home
           </Link>
         </div>
 
-        <div className="flex-1 flex items-start sm:items-center justify-center px-4 sm:px-8 pb-8 pt-4 relative z-10">
-          <div className="w-full max-w-[460px] bg-white/70 sm:bg-transparent backdrop-blur-sm sm:backdrop-blur-none border border-slate-200/80 sm:border-0 rounded-3xl shadow-lg sm:shadow-none px-6 py-8 sm:px-2 sm:py-0">
+        <div className="flex-1 flex flex-col justify-center items-center px-4 sm:px-8 py-6 relative z-10">
+          <div className="lg:hidden mb-8 flex flex-col items-center">
+            <Link href="/" className="flex flex-col items-center gap-2.5 group">
+              <div className="w-12 h-12 bg-gradient-to-br from-[#FF6014] to-[#FF8142] rounded-xl flex items-center justify-center text-white shadow-lg shadow-[#FF6014]/25">
+                <Sparkles size={20} className="stroke-[2.5]" />
+              </div>
+              <span className="font-extrabold text-[#FF6014] text-xl tracking-tight">
+                Rajseba
+              </span>
+            </Link>
+          </div>
+
+          <div className="w-full max-w-[440px] bg-transparent border border-slate-200/80 sm:border-0 rounded-3xl shadow-lg sm:shadow-none px-6 py-8 sm:px-2 sm:py-0">
             <div className="flex flex-col items-center text-center mb-8">
               <Link
                 href="/"
-                className="flex flex-col items-center gap-2.5 group mb-5"
+                className="flex flex-col items-center gap-2.5 group mb-5 lg:flex hidden"
               >
-                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-br from-[#FF6014] to-rose-600 rounded-2xl flex items-center justify-center text-white shadow-xl shadow-rose-400/25 group-hover:scale-105 transition-transform">
-                  <Sparkles size={26} className="stroke-[2]" />
+                <div className="w-14 h-14 bg-gradient-to-br from-[#FF6014] to-[#FF8142] rounded-2xl flex items-center justify-center text-white shadow-xl shadow-[#FF6014]/25 group-hover:scale-105 transition-transform">
+                  <Sparkles size={24} className="stroke-[2]" />
                 </div>
-                <span className="font-black text-xl sm:text-2xl text-slate-900 tracking-tight">
+                <span className="font-black text-xl text-slate-900 tracking-tight">
                   Rajseba
                 </span>
               </Link>
-              <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight leading-tight flex items-center gap-2.5">
+              <div className="inline-flex items-center gap-2 bg-[#FFF4EE] text-[#FF6014] px-3.5 py-1.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider mb-4 border border-[#FF6014]/20">
+                <ShieldCheck size={13} className="stroke-[2.5]" /> New User Registration
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight leading-tight flex items-center gap-2.5">
                 <UserPlus size={28} className="text-[#FF6014]" />
                 Create Account
-              </h1>
-              <p className="text-slate-500 text-sm font-medium mt-2 leading-relaxed max-w-xs">
+              </h2>
+              <p className="text-slate-400 text-xs font-semibold mt-2 leading-relaxed max-w-xs">
                 Sign up to access premium home services.
               </p>
             </div>
@@ -296,14 +310,9 @@ export default function RegisterPage() {
           </div>
           <div>
             Developed by{" "}
-            <a
-              href="https://jevxo.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#FF6014] hover:underline font-semibold"
-            >
-              Jevxo
-            </a>
+            <span className="text-[#FF6014] font-semibold">
+              Aftabfarhan Arko
+            </span>
           </div>
         </div>
       </div>

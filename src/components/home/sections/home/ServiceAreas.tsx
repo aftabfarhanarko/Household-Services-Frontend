@@ -150,7 +150,7 @@ export default function ServiceAreas() {
 
                   {area.zones.length > 0 ? (
                     <div className="flex flex-wrap gap-1.5 mb-2">
-                      {area.zones.slice(0, 4).map((zone: string) => (
+                      {area.zones.map((zone: string) => (
                         <span
                           key={zone}
                           className={`px-2.5 py-1 rounded-xl text-[10px] font-extrabold border transition-colors ${area.active
@@ -166,13 +166,6 @@ export default function ServiceAreas() {
                     <p className="text-[11px] text-slate-400 font-semibold italic pl-1">Districts coming soon</p>
                   )}
                 </div>
-
-                {area.zones.length > 4 && (
-                  <div className="mt-3 pt-3 border-t border-slate-100 text-[10px] text-slate-400 font-extrabold uppercase tracking-wider pl-1 flex items-center justify-between">
-                    <span>+{area.zones.length - 4} more districts</span>
-                    <span className="text-[#FF6014] font-black group-hover:translate-x-0.5 transition-transform">→</span>
-                  </div>
-                )}
               </motion.div>
             ))}
           </motion.div>

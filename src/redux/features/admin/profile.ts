@@ -1,6 +1,7 @@
 import { baseApi } from "@/redux/api/baseApi";
 
 export const profileApi = baseApi.injectEndpoints({
+  overrideExisting: true,
   endpoints: (builder) => ({
     getAllProfiles: builder.query({
       query: () => "/profiles",

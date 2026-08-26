@@ -1,7 +1,7 @@
 "use client";
 
-import React from "react";
-import { XCircle } from "lucide-react";
+import React, { useState } from "react";
+import { XCircle, Eye, EyeOff } from "lucide-react";
 
 interface AgentModalProps {
   step: 1 | 2;
@@ -40,6 +40,8 @@ export default function AgentModal({
   nidBackFile,
   setNidBackFile,
 }: AgentModalProps) {
+  const [showPassword, setShowPassword] = useState(false);
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4 overflow-y-auto">
       <div className="bg-white rounded-[32px] shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto p-6 sm:p-8 animate-in fade-in zoom-in-95 duration-200 scrollbar-thin">
@@ -86,6 +88,26 @@ export default function AgentModal({
                 className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all"
                 placeholder="01XXXXXXXXX"
               />
+            </div>
+            <div>
+              <label className="block text-xs font-semibold text-slate-500 mb-1.5 uppercase">Password</label>
+              <div className="relative">
+                <input
+                  name="password"
+                  type={showPassword ? "text" : "password"}
+                  required
+                  minLength={6}
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 pr-10 text-sm text-slate-900 focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all"
+                  placeholder="••••••••"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors"
+                >
+                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                </button>
+              </div>
             </div>
             <div className="pt-4 flex justify-end gap-3 border-t border-slate-100">
               <button

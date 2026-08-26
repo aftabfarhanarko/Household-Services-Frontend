@@ -93,6 +93,7 @@ export function useVendorState() {
       name: formData.get("name"),
       email: formData.get("email"),
       phone: formData.get("phone"),
+      password: formData.get("password"),
       roleId: Number(vendorRole.id || vendorRole._id),
       commission_percentage: Number(formData.get("commission_percentage")) || 0,
     };

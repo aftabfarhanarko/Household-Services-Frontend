@@ -108,6 +108,7 @@ export function useEmployeeState() {
       name: formData.get("name"),
       email: formData.get("email"),
       phone: formData.get("phone"),
+      password: formData.get("password"),
       roleId: Number(employeeRole.id || employeeRole._id),
       vendor_id: role === "vendor" ? Number(currentUser?.id) : (formData.get("vendor_id") ? Number(formData.get("vendor_id")) : undefined),
       vendor_unique_id: null,

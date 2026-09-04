@@ -181,6 +181,36 @@ export default function Footer() {
     }] : []),
   ];
 
+  const defaultSocials = [
+    {
+      Icon: FacebookIcon,
+      label: "Facebook",
+      href: "https://facebook.com",
+      hoverClass: "hover:text-[#1877F2] hover:border-[#1877F2]/40 hover:shadow-[0_4px_12px_rgba(24,119,242,0.15)]",
+    },
+    {
+      Icon: InstagramIcon,
+      label: "Instagram",
+      href: "https://instagram.com",
+      hoverClass: "hover:text-[#E4405F] hover:border-[#E4405F]/40 hover:shadow-[0_4px_12px_rgba(228,64,95,0.15)]",
+    },
+    {
+      Icon: WhatsAppIcon,
+      label: "WhatsApp",
+      href: "https://wa.me/",
+      hoverClass: "hover:text-[#25D366] hover:border-[#25D366]/40 hover:shadow-[0_4px_12px_rgba(37,211,102,0.15)]",
+    },
+    {
+      Icon: YoutubeIcon,
+      label: "YouTube",
+      href: "https://youtube.com",
+      hoverClass: "hover:text-[#FF0000] hover:border-[#FF0000]/40 hover:shadow-[0_4px_12px_rgba(255,0,0,0.15)]",
+    },
+  ];
+
+  // If dynamicSocials has items from Admin API, show those; otherwise show defaultSocials
+  const activeSocials = dynamicSocials.length > 0 ? dynamicSocials : defaultSocials;
+
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
     if (email.trim()) {
@@ -231,7 +261,7 @@ export default function Footer() {
 
             {/* Socials */}
             <div className="flex items-center gap-3 pt-1">
-              {dynamicSocials.map(({ Icon, label, href, hoverClass }) => (
+              {activeSocials.map(({ Icon, label, href, hoverClass }) => (
                 <motion.a
                   key={label}
                   href={href}
@@ -240,7 +270,7 @@ export default function Footer() {
                   aria-label={label}
                   whileHover={{ y: -4, scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
-                  className={`w-10 h-10 bg-white border border-slate-100 rounded-xl flex items-center justify-center text-slate-400 transition-all duration-300 shrink-0 ${hoverClass}`}
+                  className={`w-10 h-10 bg-white border border-slate-200/80 rounded-xl flex items-center justify-center text-slate-600 transition-all duration-300 shrink-0 shadow-2xs ${hoverClass}`}
                 >
                   <Icon />
                 </motion.a>

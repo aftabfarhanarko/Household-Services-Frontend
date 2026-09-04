@@ -5,11 +5,15 @@ import { Check, CheckCircle, ArrowRight } from "lucide-react";
 import { DisplayPackage } from "./packageOfferUtils";
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 28, scale: 0.94 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { type: "spring", stiffness: 65, damping: 15 },
+    scale: 1,
+    transition: {
+      duration: 0.6,
+      ease: [0.2, 0.8, 0.2, 1],
+    },
   },
 } as const;
 

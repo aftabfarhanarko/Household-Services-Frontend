@@ -37,6 +37,30 @@ function useCountUp(target: number, duration: number = 2000, isDecimal = false, 
   return count;
 }
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      delayChildren: 0.15,
+      staggerChildren: 0.08,
+    },
+  },
+} as const;
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.35,
+      ease: [0.25, 0.1, 0.25, 1.0],
+    },
+  },
+} as const;
+
 function StatCard({ stat, triggered }: { stat: typeof DEFAULT_STATS[0]; triggered: boolean }) {
   const count = useCountUp(stat.value, 2200, stat.isDecimal, triggered);
 
@@ -46,7 +70,7 @@ function StatCard({ stat, triggered }: { stat: typeof DEFAULT_STATS[0]; triggere
   };
 
   return (
-    <div className="flex flex-col items-center group">
+    <motion.div variants={itemVariants} className="flex flex-col items-center group">
       <div className="w-16 h-16 rounded-full bg-rose-50 flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110">
         <stat.icon className="w-8 h-8 text-[#FF6014]" />
       </div>
@@ -54,7 +78,7 @@ function StatCard({ stat, triggered }: { stat: typeof DEFAULT_STATS[0]; triggere
         {triggered ? `${formatNumber(count)}${stat.suffix}` : '0'}
       </h3>
       <p className="text-slate-500 font-medium text-sm md:text-base">{stat.label}</p>
-    </div>
+    </motion.div>
   );
 }
 
@@ -80,7 +104,8 @@ export default function Stats() {
       ([entry]) => {
         if (entry.isIntersecting) {
           setTriggered(true);
-          observer.disconnect();
+        } else {
+          setTriggered(false);
         }
       },
       { threshold: 0.25 }
@@ -110,10 +135,10 @@ export default function Stats() {
         </div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.15 }}
-          transition={{ type: "spring", stiffness: 85, damping: 16 }}
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, amount: 0.1 }}
           className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 text-center"
         >
           {stats.map((stat) => (

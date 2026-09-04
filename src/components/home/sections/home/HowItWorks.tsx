@@ -49,14 +49,14 @@ function TimelineStep({ step, isEven }: { step: (typeof HOW_IT_WORKS_CONTENT.ste
         <motion.div
           initial={{ opacity: 0, x: isEven ? 40 : -40 }}
           whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: false, amount: 0.3 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className={`flex flex-col ${isEven ? "items-start" : "items-start md:items-end"}`}
         >
           <motion.span
             initial={{ opacity: 0, y: 8 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={{ once: false, amount: 0.3 }}
             transition={{ delay: 0.1, duration: 0.4 }}
             className="text-[10px] md:text-[11px] font-black tracking-[0.2em] text-[#FF6014]/70 uppercase mb-1.5 md:mb-2"
           >
@@ -67,7 +67,7 @@ function TimelineStep({ step, isEven }: { step: (typeof HOW_IT_WORKS_CONTENT.ste
             <motion.div
               initial={{ opacity: 0, rotate: -30, scale: 0.6 }}
               whileInView={{ opacity: 1, rotate: 0, scale: 1 }}
-              viewport={{ once: true, amount: 0.3 }}
+              viewport={{ once: false, amount: 0.3 }}
               transition={{ delay: 0.2, type: "spring", stiffness: 220, damping: 14 }}
               className="w-9 h-9 md:w-11 md:h-11 rounded-lg md:rounded-xl bg-[#FFF4EE] text-[#FF6014] flex items-center justify-center shrink-0"
             >
@@ -79,7 +79,7 @@ function TimelineStep({ step, isEven }: { step: (typeof HOW_IT_WORKS_CONTENT.ste
           <motion.p
             initial={{ opacity: 0, y: 8 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={{ once: false, amount: 0.3 }}
             transition={{ delay: 0.3, duration: 0.4 }}
             className="text-[14px] md:text-[16px] text-slate-800 leading-relaxed font-white-500 max-w-sm"
           >
@@ -89,7 +89,7 @@ function TimelineStep({ step, isEven }: { step: (typeof HOW_IT_WORKS_CONTENT.ste
           <motion.div
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={{ once: false, amount: 0.3 }}
             transition={{ delay: 0.45, duration: 0.5 }}
             className={`h-px w-8 md:w-10 bg-[#FF6014]/40 mt-3 md:mt-4 origin-left ${!isEven ? "md:origin-right" : ""}`}
           />
@@ -101,14 +101,14 @@ function TimelineStep({ step, isEven }: { step: (typeof HOW_IT_WORKS_CONTENT.ste
         <motion.div
           initial={{ scale: 0, opacity: 0 }}
           whileInView={{ scale: 1, opacity: 1 }}
-          viewport={{ once: true, amount: 0.5 }}
+          viewport={{ once: false, amount: 0.5 }}
           transition={{ type: "spring", stiffness: 220, damping: 14 }}
           className="relative"
         >
           <motion.div
             initial={{ scale: 1, opacity: 0.5 }}
             whileInView={{ scale: [1, 1.4, 1], opacity: [0.5, 0, 0] }}
-            viewport={{ once: true, amount: 0.5 }}
+            viewport={{ once: false, amount: 0.5 }}
             transition={{ duration: 0.9, delay: 0.15 }}
             className="absolute inset-0 rounded-full bg-[#FF6014]/40 pointer-events-none"
           />

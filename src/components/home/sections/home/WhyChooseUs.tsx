@@ -39,16 +39,23 @@ const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.08, delayChildren: 0.1 },
+    transition: {
+      delayChildren: 0.15,
+      staggerChildren: 0.08,
+    },
   },
 } as const;
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 20, scale: 0.95 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { type: "spring", stiffness: 65, damping: 15 },
+    scale: 1,
+    transition: {
+      duration: 0.35,
+      ease: [0.25, 0.1, 0.25, 1.0],
+    },
   },
 } as const;
 
@@ -73,7 +80,7 @@ export default function WhyChooseUs() {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.15 }}
+          viewport={{ once: false, amount: 0.1 }}
           className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 lg:gap-10"
         >
           {WHY_CHOOSE_US_CONTENT.features.map((feature, i) => {

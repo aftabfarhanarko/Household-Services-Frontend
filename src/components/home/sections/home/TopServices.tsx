@@ -25,15 +25,25 @@ const COLOR_PAIRS = [
 // ─── Animation variants ───────────────────────────────────────────────────────
 const containerVariants = {
   hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
+  visible: {
+    opacity: 1,
+    transition: {
+      delayChildren: 1, // First item shows after 1s delay
+      staggerChildren: 2, // Dynamic items show 2 seconds apart
+    },
+  },
 } as const;
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 30, scale: 0.9 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { type: "spring", stiffness: 65, damping: 15 },
+    scale: 1,
+    transition: {
+      duration: 0.6,
+      ease: [0.25, 0.1, 0.25, 1.0],
+    },
   },
 } as const;
 

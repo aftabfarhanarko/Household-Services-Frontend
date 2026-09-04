@@ -70,18 +70,22 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
+      delayChildren: 0.15,
       staggerChildren: 0.08,
-      delayChildren: 0.1,
     },
   },
 } as const;
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 20, scale: 0.95 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { type: "spring", stiffness: 65, damping: 15 },
+    scale: 1,
+    transition: {
+      duration: 0.35,
+      ease: [0.25, 0.1, 0.25, 1.0],
+    },
   },
 } as const;
 
@@ -145,7 +149,8 @@ const ExploreCategories = () => {
             key="grid"
             variants={containerVariants}
             initial="hidden"
-            animate="visible"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.1 }}
             className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4 md:gap-6 lg:gap-7"
           >
             {categories.map((cat: any) => {

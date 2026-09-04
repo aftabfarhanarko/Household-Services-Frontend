@@ -28,21 +28,21 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      delayChildren: 1, // First item shows after 1s delay
-      staggerChildren: 2, // Dynamic items show 2 seconds apart
+      delayChildren: 0.2,
+      staggerChildren: 0.22, // Balanced smooth stagger
     },
   },
 } as const;
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 30, scale: 0.9 },
+  hidden: { opacity: 0, y: 28, scale: 0.94 },
   visible: {
     opacity: 1,
     y: 0,
     scale: 1,
     transition: {
-      duration: 0.6,
-      ease: [0.25, 0.1, 0.25, 1.0],
+      duration: 0.6, // Smooth 0.6s duration
+      ease: [0.2, 0.8, 0.2, 1], // Natural fluid easing
     },
   },
 } as const;
@@ -169,7 +169,7 @@ export default function TopServices() {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.15 }}
+          viewport={{ once: false, amount: 0.1 }}
           className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8"
         >
           {displayServices.map((service: any, i: number) => {
@@ -201,7 +201,6 @@ export default function TopServices() {
               <motion.div
                 key={service.id}
                 variants={cardVariants}
-                transition={{ duration: 0.5, delay: i * 0.15, ease: "easeOut" }}
                 className="bg-white/40 backdrop-blur-xl rounded-3xl overflow-hidden border border-[#FF6014]/25 shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] group flex flex-col h-full hover-card-premium transition-all duration-300 hover:bg-white/60 hover:border-[#FF6014]/70 hover:shadow-[0_12px_40px_0_rgba(255,96,20,0.15)]"
               >
                 {/* ── Illustration or image ── */}

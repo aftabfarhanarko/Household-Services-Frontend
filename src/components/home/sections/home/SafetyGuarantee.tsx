@@ -30,6 +30,30 @@ const GUARANTEES = [
   },
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      delayChildren: 0.15,
+      staggerChildren: 0.08,
+    },
+  },
+} as const;
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 20, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.35,
+      ease: [0.25, 0.1, 0.25, 1.0],
+    },
+  },
+} as const;
+
 export default function SafetyGuarantee() {
   return (
     <section className="py-8 md:py-12 relative overflow-hidden">
@@ -51,14 +75,20 @@ export default function SafetyGuarantee() {
         </div>
 
           {/* Grid Cards (Glassmorphism design) */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 relative z-10">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.1 }}
+            className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 relative z-10"
+          >
             {GUARANTEES.map((item, index) => {
               const Icon = item.icon;
               return (
                 <motion.div
                   key={index}
+                  variants={cardVariants}
                   whileHover={{ y: -6, scale: 1.02 }}
-                  transition={{ duration: 0.2 }}
                   className="bg-white/40 backdrop-blur-xl rounded-2xl p-5 border border-white/60 shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] hover:shadow-[0_12px_40px_0_rgba(255,96,20,0.15)] hover:border-[#FF6014]/40 hover:bg-white/60 transition-all duration-300 flex flex-col justify-between group"
                 >
                   <div>
@@ -86,7 +116,7 @@ export default function SafetyGuarantee() {
                 </motion.div>
               );
             })}
-          </div>
+          </motion.div>
 
       </div>
     </section>

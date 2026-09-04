@@ -4,7 +4,6 @@ import { StoreProvider } from "@/redux/StoreProvider";
 import "./globals.css";
 import { LayoutWrapper } from "@/components/home/LayoutWrapper";
 import ToasterProvider from "@/components/ToasterProvider";
-import { ServerKeepAlive } from "@/components/common/ServerKeepAlive";
 
 const baiJamjuree = Bai_Jamjuree({
   subsets: ["latin", "latin-ext", "thai"],
@@ -65,7 +64,6 @@ export default function RootLayout({
     <html lang="en" className={`${baiJamjuree.variable} antialiased`}>
       <body className={`min-h-screen flex flex-col bg-white text-slate-900 ${baiJamjuree.className} antialiased`}>
         <StoreProvider>
-          <ServerKeepAlive />
           <LayoutWrapper>
             {children}
           </LayoutWrapper>

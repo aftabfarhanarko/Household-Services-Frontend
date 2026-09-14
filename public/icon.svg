@@ -1,0 +1,42 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' width='512' height='512'>
+  <defs>
+    <linearGradient id='orangeGrad' x1='0%' y1='0%' x2='100%' y2='100%'>
+      <stop offset='0%' stop-color='#FF6500' />
+      <stop offset='100%' stop-color='#FF4500' />
+    </linearGradient>
+    <filter id='subtleGlow' x='-10%' y='-10%' width='120%' height='120%'>
+      <feDropShadow dx='0' dy='6' stdDeviation='10' flood-color='#FF6014' flood-opacity='0.3'/>
+    </filter>
+  </defs>
+
+  <!-- Outer background circle -->
+  <circle cx='256' cy='256' r='240' fill='url(#orangeGrad)' filter='url(#subtleGlow)' />
+  
+  <!-- Outer Thick White Concentric Ring -->
+  <circle cx='256' cy='256' r='205' fill='none' stroke='#FFFFFF' stroke-width='24' opacity='0.98' />
+  
+  <!-- Inner Thin White Concentric Ring -->
+  <circle cx='256' cy='256' r='175' fill='none' stroke='#FFFFFF' stroke-width='6' opacity='0.85' />
+
+  <!-- Center Emblem (R with Roof Arc and Service Dot) -->
+  <g transform='translate(0, 0)'>
+    <!-- Styled Bold 'R' -->
+    <text x='256' y='338' 
+          font-family='system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' 
+          font-weight='900' 
+          font-size='225' 
+          fill='#FFFFFF' 
+          text-anchor='middle' 
+          letter-spacing='-4'>R</text>
+
+    <!-- Overarching Roofline Arc -->
+    <path d='M 135 245 C 190 170, 260 148, 380 192' 
+          fill='none' 
+          stroke='#FFFFFF' 
+          stroke-width='22' 
+          stroke-linecap='round' />
+
+    <!-- Service Dot at Roof Peak Right -->
+    <circle cx='345' cy='155' r='16' fill='#FFFFFF' />
+  </g>
+</svg>

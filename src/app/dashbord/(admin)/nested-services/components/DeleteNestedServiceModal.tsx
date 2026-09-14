@@ -3,6 +3,7 @@
 import React from "react";
 import { X, Layers } from "lucide-react";
 import { NestedService } from "@/redux/features/admin/service";
+import { useAppSelector } from "@/redux/hooks";
 
 interface DeleteNestedServiceModalProps {
   isDeleteModalOpen: boolean;
@@ -19,14 +20,32 @@ export default function DeleteNestedServiceModal({
   setItemToDelete,
   handleDelete,
 }: DeleteNestedServiceModalProps) {
+  const lang = useAppSelector((state) => state.lang.value);
   if (!isDeleteModalOpen || !itemToDelete) return null;
+
+  const t = {
+    bn: {
+      title: "সাব-সার্ভিস মুছুন",
+      under: "অধীনে:",
+      confirmDesc: "আপনি কি নিশ্চিত যে আপনি এই সাব-সার্ভিসটি মুছে ফেলতে চান? এই ক্রিয়াটি বাতিল করা যাবে না।",
+      cancel: "বাতিল",
+      delete: "মুছে ফেলুন",
+    },
+    en: {
+      title: "Delete Sub-Service",
+      under: "Under:",
+      confirmDesc: "Are you sure you want to delete this sub-service? This action cannot be undone.",
+      cancel: "Cancel",
+      delete: "Delete",
+    },
+  }[lang];
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm animate-in fade-in duration-200">
       <div className="bg-white rounded-3xl w-full max-w-md shadow-2xl border border-slate-100 overflow-hidden animate-in zoom-in-95 duration-200">
         {/* Modal Header */}
         <div className="p-6 border-b border-slate-100 flex items-center justify-between">
-          <h2 className="text-xl font-bold text-slate-900">Delete Sub-Service</h2>
+          <h2 className="text-xl font-bold text-slate-900">{t.title}</h2>
           <button
             onClick={() => {
               setIsDeleteModalOpen(false);
@@ -52,13 +71,13 @@ export default function DeleteNestedServiceModal({
               <span className="font-mono text-slate-400 font-bold text-xs">ID: {itemToDelete.id}</span>
               <h3 className="text-lg font-bold text-slate-900 mt-1">{itemToDelete.name}</h3>
               {itemToDelete.service && (
-                <p className="text-xs text-slate-400 mt-0.5">Under: {itemToDelete.service.name}</p>
+                <p className="text-xs text-slate-400 mt-0.5">{t.under} {itemToDelete.service.name}</p>
               )}
             </div>
           </div>
 
           <p className="text-sm text-slate-500 max-w-xs mx-auto">
-            Are you sure you want to delete this sub-service? This action cannot be undone.
+            {t.confirmDesc}
           </p>
 
           {/* Modal Footer */}
@@ -71,13 +90,13 @@ export default function DeleteNestedServiceModal({
               }}
               className="px-4 py-2 text-sm font-bold text-slate-500 hover:bg-slate-50 rounded-xl transition-all"
             >
-              Cancel
+              {t.cancel}
             </button>
             <button
               onClick={handleDelete}
               className="bg-[#FF6014] hover:bg-red-600 text-white font-bold px-5 py-2.5 rounded-xl text-sm transition-all active:scale-[0.98] shadow-md shadow-red-500/10"
             >
-              Delete
+              {t.delete}
             </button>
           </div>
         </div>

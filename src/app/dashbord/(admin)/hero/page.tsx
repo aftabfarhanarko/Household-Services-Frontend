@@ -41,7 +41,7 @@ export default function HeroManagementPage() {
 
   const lang = useAppSelector((state) => state.lang.value);
 
-  if (role !== "superadmin") {
+  if (role !== "superadmin" && role !== "admin") {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center p-8 bg-white border border-slate-100 rounded-3xl shadow-sm text-center animate-in fade-in duration-200">
         <div className="p-4 bg-[#FFF8F4] rounded-2xl text-[#FF6014] mb-4">

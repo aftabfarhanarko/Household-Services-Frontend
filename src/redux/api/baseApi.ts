@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { getAccessToken, getRefreshToken, setTokens, clearTokens } from '@/lib/token';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://home-services-backend-b6v4.onrender.com";
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://home-services-backend-m3pm.onrender.com";
 
 // Background ping to keep Render backend warm and eliminate 50s cold-start delays
 if (typeof window !== "undefined") {
@@ -23,6 +23,15 @@ const baseQuery = fetchBaseQuery({
     return headers;
   },
   timeout: 15000,
+  responseHandler: async (response) => {
+    const text = await response.text();
+    if (!text || !text.trim()) return null;
+    try {
+      return JSON.parse(text);
+    } catch {
+      return text;
+    }
+  },
 });
 
 const isProtectedRoute = (pathname: string): boolean => {

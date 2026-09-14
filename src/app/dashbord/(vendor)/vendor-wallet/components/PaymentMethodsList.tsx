@@ -3,6 +3,7 @@
 import React from "react";
 import { Plus, CreditCard, Building, Trash2 } from "lucide-react";
 import { Getway } from "@/redux/features/shared/getwayApi";
+import { useAppSelector } from "@/redux/hooks";
 
 interface PaymentMethodsListProps {
   gateways: Getway[];
@@ -17,15 +18,29 @@ export default function PaymentMethodsList({
   setIsAddGatewayModalOpen,
   handleDeleteGateway,
 }: PaymentMethodsListProps) {
+  const lang = useAppSelector((state) => state.lang.value);
+  const t = {
+    bn: {
+      title: "পেমেন্ট মেথডসমূহ",
+      addMethod: "মেথড যোগ করুন",
+      noMethods: "কোনো পেমেন্ট মেথড যোগ করা হয়নি। কমিশন তুলতে একটি মেথড যোগ করুন।",
+    },
+    en: {
+      title: "Payment Methods",
+      addMethod: "Add Method",
+      noMethods: "No payment methods added. Please add one to withdraw commissions.",
+    },
+  }[lang];
+
   return (
     <div className="pt-4 border-t border-slate-100">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-lg font-bold text-slate-900">Payment Methods</h2>
+        <h2 className="text-lg font-bold text-slate-900">{t.title}</h2>
         <button
           onClick={() => setIsAddGatewayModalOpen(true)}
-          className="flex items-center gap-1.5 bg-brand-primary text-white font-bold px-3 py-1.5 rounded-xl text-xs hover:bg-brand-dark transition-all shadow-sm"
+          className="flex items-center gap-1.5 bg-brand-primary text-white font-bold px-3 py-1.5 rounded-xl text-xs hover:bg-brand-dark transition-all shadow-sm cursor-pointer"
         >
-          <Plus size={14} /> Add Method
+          <Plus size={14} /> {t.addMethod}
         </button>
       </div>
 
@@ -36,7 +51,7 @@ export default function PaymentMethodsList({
       ) : gateways.length === 0 ? (
         <div className="bg-slate-50 border border-slate-100 rounded-2xl p-6 text-center">
           <CreditCard size={24} className="mx-auto text-slate-400 mb-2" />
-          <p className="text-sm text-slate-500">No payment methods added. Please add one to withdraw commissions.</p>
+          <p className="text-sm text-slate-500">{t.noMethods}</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">

@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Plus, Search, Trash2, FolderOpen, AlertTriangle, Settings } from "lucide-react";
 
-const API = process.env.NEXT_PUBLIC_API_URL || "https://home-services-backend-b6v4.onrender.com";
+const API = process.env.NEXT_PUBLIC_API_URL || "https://home-services-backend-m3pm.onrender.com";
 
 interface ServiceItem { id: number; name: string; rate: number; createdAt: string; }
 
@@ -28,12 +28,19 @@ export default function ServicesPage() {
     return { Authorization: `Bearer ${token}`, "Content-Type": "application/json" };
   };
 
+  const safeJson = async (res: Response) => {
+    const text = await res.text();
+    if (!text || !text.trim()) return null;
+    try { return JSON.parse(text); } catch { return null; }
+  };
+
   const fetchServices = async () => {
     try {
       setLoading(true);
       const res = await fetch(`${API}/api/manual-services`, { headers: authHeader() });
       if (!res.ok) throw new Error("Failed to load services");
-      setServices(await res.json());
+      const data = await safeJson(res);
+      setServices(Array.isArray(data) ? data : []);
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -56,8 +63,8 @@ export default function ServicesPage() {
         body: JSON.stringify({ name, rate: Number(rate) }),
       });
       if (!res.ok) {
-        const d = await res.json();
-        throw new Error(d.message || "Failed to save service");
+        const d = await safeJson(res);
+        throw new Error(d?.message || "Failed to save service");
       }
       setName(""); setRate("");
       setSuccess("Service saved successfully!");

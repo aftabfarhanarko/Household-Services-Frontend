@@ -37,8 +37,16 @@ const langSlice = createSlice({
         localStorage.setItem('rajseba_lang', nextLang);
       }
     },
+    restoreLanguage: (state) => {
+      if (typeof window !== 'undefined') {
+        const saved = localStorage.getItem('rajseba_lang') as Language;
+        if (saved === 'bn' || saved === 'en') {
+          state.value = saved;
+        }
+      }
+    },
   },
 });
 
-export const { setLanguage, toggleLanguage } = langSlice.actions;
+export const { setLanguage, toggleLanguage, restoreLanguage } = langSlice.actions;
 export default langSlice.reducer;

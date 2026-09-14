@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { useAppSelector } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { toggleLanguage } from "@/redux/features/shared/langSlice";
 import {
   useGetAllProfilesQuery,
   useCreateProfileMutation,
@@ -134,6 +135,8 @@ const dashboardTranslations = {
 };
 
 export default function ProviderDashboard() {
+  const dispatch = useAppDispatch();
+  const lang = useAppSelector((state) => state.lang.value);
   const authUser = useAppSelector((state) => state.auth.user);
   const { data: profilesRes } = useGetAllProfilesQuery();
   const { data: categoriesRes } = useGetAllCategoriesQuery();
@@ -153,7 +156,6 @@ export default function ProviderDashboard() {
   const [selectedEmployeeIds, setSelectedEmployeeIds] = useState<number[]>([]);
   const [showNotifications, setShowNotifications] = useState(false);
   const [prevUnreadCount, setPrevUnreadCount] = useState(0);
-  const [lang, setLang] = useState<"bn" | "en">("bn");
   const t = dashboardTranslations[lang];
 
   const myProfile = profilesRes?.data?.find(
@@ -340,9 +342,9 @@ export default function ProviderDashboard() {
         className="relative overflow-hidden bg-white/90 backdrop-blur-xl rounded-3xl border border-orange-100/90 shadow-sm px-7 py-6.5 group hover:shadow-xl hover:shadow-[#FF6014]/5 transition-all duration-300"
       >
         {/* Language Toggle */}
-        <div className="absolute top-6 right-7 z-20 flex items-center gap-3">
+        <div className="absolute top-6 right-7 z-20 hidden md:flex items-center gap-3">
           <button
-            onClick={() => setLang(lang === "bn" ? "en" : "bn")}
+            onClick={() => dispatch(toggleLanguage())}
             className="flex items-center gap-1.5 bg-orange-50/80 hover:bg-orange-100/80 text-[#FF6014] px-3.5 py-1.5 rounded-full text-xs font-black border border-orange-200/60 shadow-2xs transition-colors cursor-pointer"
           >
             <Languages className="w-3.5 h-3.5 text-[#FF6014]" />

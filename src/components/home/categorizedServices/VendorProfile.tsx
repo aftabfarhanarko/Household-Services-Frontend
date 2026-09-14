@@ -1,9 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { Star, Building, CheckCircle2, MessageSquare, Languages } from "lucide-react";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { toggleLanguage } from "@/redux/features/shared/langSlice";
 
 interface Vendor {
   id: number;
@@ -18,7 +20,8 @@ interface Vendor {
 
 export function VendorProfile({ vendor, serviceRating = "0.0" }: { vendor?: Vendor; serviceRating?: string | number }) {
   const router = useRouter();
-  const [lang, setLang] = useState<"bn" | "en">("bn");
+  const dispatch = useAppDispatch();
+  const lang = useAppSelector((state) => state.lang.value);
 
   if (!vendor) return null;
 
@@ -45,7 +48,7 @@ export function VendorProfile({ vendor, serviceRating = "0.0" }: { vendor?: Vend
       {/* Language Toggle */}
       <div className="absolute top-4 right-4 z-20">
         <button
-          onClick={() => setLang(lang === "bn" ? "en" : "bn")}
+          onClick={() => dispatch(toggleLanguage())}
           className="flex items-center gap-1.5 bg-slate-50 hover:bg-slate-100 text-slate-600 px-3 py-1.5 rounded-full text-[10px] font-bold border border-slate-200 transition-colors"
         >
           <Languages className="w-3 h-3" />

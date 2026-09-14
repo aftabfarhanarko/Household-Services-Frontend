@@ -7,13 +7,46 @@ import { CustomSelect } from "@/components/ui/select";
 import { useQuickBooking } from "./hooks/useQuickBooking";
 import { DesktopBookingSidebar } from "@/components/home/booking/DesktopBookingSidebar";
 import AccessDenied from "../(client)/components/AccessDenied";
+import { useAppSelector } from "@/redux/hooks";
 
 export default function AgentQuickBookingPage() {
   const state = useQuickBooking();
+  const lang = useAppSelector((state) => state.lang.value);
 
   if (state.role !== "agent" && state.role !== "superadmin" && state.role !== "admin") {
     return <AccessDenied roleRequired="Agent" />;
   }
+
+  const t = {
+    bn: {
+      title: "কুইক বুকিং কনসোল",
+      subtitle: "ক্যাটাগরি এর ওপর ভিত্তি করে সঙ্গে সঙ্গে সার্ভিস বুক করুন।",
+      selectServiceStep: "১. সার্ভিস নির্বাচন করুন",
+      selectClientLabel: "ক্লায়েন্ট নির্বাচন করুন (ঐচ্ছিক)",
+      chooseClientPlaceholder: "-- একজন ক্লায়েন্ট বাছাই করুন --",
+      categoryLabel: "ক্যাটাগরি",
+      categoryPlaceholder: "একটি ক্যাটাগরি নির্বাচন করুন",
+      serviceLabel: "সার্ভিস",
+      servicePlaceholder: "সার্ভিস নির্বাচন করুন",
+      loading: "লোড হচ্ছে...",
+      availableSubServices: "উপলব্ধ সাব-সার্ভিসসমূহ",
+      addBtn: "যোগ করুন",
+    },
+    en: {
+      title: "Quick Booking Console",
+      subtitle: "Book services instantly based on category.",
+      selectServiceStep: "1. Select Service",
+      selectClientLabel: "Select Client (Optional)",
+      chooseClientPlaceholder: "-- Choose a Client --",
+      categoryLabel: "Category",
+      categoryPlaceholder: "Select a category",
+      serviceLabel: "Service",
+      servicePlaceholder: "Select service",
+      loading: "Loading...",
+      availableSubServices: "Available Sub-services",
+      addBtn: "Add",
+    },
+  }[lang];
 
   return (
     <div className="space-y-8 animate-in fade-in duration-200">
@@ -24,8 +57,8 @@ export default function AgentQuickBookingPage() {
             <Zap className="w-6 h-6 fill-current" />
           </div>
           <div>
-            <h1 className="text-xl font-extrabold text-slate-900">Quick Booking Console</h1>
-            <p className="text-xs text-slate-400 mt-0.5">Book services instantly based on category.</p>
+            <h1 className="text-xl font-extrabold text-slate-900">{t.title}</h1>
+            <p className="text-xs text-slate-400 mt-0.5">{t.subtitle}</p>
           </div>
         </div>
       </div>
@@ -33,46 +66,46 @@ export default function AgentQuickBookingPage() {
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-8 items-start">
         {/* Left Column: Selection */}
         <div className="bg-white p-6 rounded-[32px] border border-slate-100 shadow-sm space-y-6">
-          <h3 className="text-base font-bold text-slate-800 border-b border-slate-50 pb-2">1. Select Service</h3>
+          <h3 className="text-base font-bold text-slate-800 border-b border-slate-50 pb-2">{t.selectServiceStep}</h3>
 
           {(state.role === "agent" || state.role === "admin" || state.role === "superadmin") && state.clientOptions.length > 0 && (
             <div className="mb-4">
               <CustomSelect
-                label="Select Client (Optional)"
+                label={t.selectClientLabel}
                 options={state.clientOptions}
                 value={state.selectedClientId}
                 onChange={(val) => state.setSelectedClientId(val)}
-                placeholder="-- Choose a Client --"
+                placeholder={t.chooseClientPlaceholder}
               />
             </div>
           )}
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <CustomSelect
-              label="Category"
-              options={state.loadingCategories ? [{ value: "", label: "Loading..." }] : state.categoryOptions}
+              label={t.categoryLabel}
+              options={state.loadingCategories ? [{ value: "", label: t.loading }] : state.categoryOptions}
               value={state.selectedCategoryId}
               onChange={(val) => {
                 state.setSelectedCategoryId(val);
                 state.setSelectedServiceId("");
               }}
-              placeholder="Select a category"
+              placeholder={t.categoryPlaceholder}
             />
 
             {state.selectedCategoryId && (
               <CustomSelect
-                label="Service"
-                options={state.loadingServices ? [{ value: "", label: "Loading..." }] : state.serviceOptions}
+                label={t.serviceLabel}
+                options={state.loadingServices ? [{ value: "", label: t.loading }] : state.serviceOptions}
                 value={state.selectedServiceId}
                 onChange={(val) => state.setSelectedServiceId(val)}
-                placeholder="Select service"
+                placeholder={t.servicePlaceholder}
               />
             )}
           </div>
 
           {state.selectedServiceId && state.displayServices.length > 0 && (
             <div className="mt-6">
-              <h4 className="text-sm font-bold text-slate-800 mb-4">Available Sub-services</h4>
+              <h4 className="text-sm font-bold text-slate-800 mb-4">{t.availableSubServices}</h4>
               <div className="space-y-4">
                 {state.displayServices.map((serviceGroup: any) => (
                   <div key={serviceGroup.id} className="border border-slate-100 rounded-2xl p-4 bg-slate-50/50">
@@ -100,7 +133,7 @@ export default function AgentQuickBookingPage() {
                                   onClick={() => state.handleUpdateQuantity(sub.id, 1)}
                                   className="text-[10px] font-bold bg-rose-50 text-rose-600 px-3 py-1.5 rounded-lg hover:bg-rose-100 transition cursor-pointer"
                                 >
-                                  Add
+                                  {t.addBtn}
                                 </button>
                               )}
                             </div>

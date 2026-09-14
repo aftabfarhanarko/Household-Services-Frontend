@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Plus, Search, Trash2, Eye, Users, Settings, FileText, AlertTriangle, Receipt, DollarSign, CheckCircle, AlertCircle } from "lucide-react";
 import { CustomSelect } from "@/components/ui/select";
 
-const API = process.env.NEXT_PUBLIC_API_URL || "https://home-services-backend-b6v4.onrender.com";
+const API = process.env.NEXT_PUBLIC_API_URL || "https://home-services-backend-m3pm.onrender.com";
 
 interface CatalogService { id: number; name: string; rate: number; }
 interface InvoiceItem { description: string; inceFit?: string; qty: number; rate: number; amount: number; }
@@ -42,6 +42,12 @@ export default function ManualInvoicePage() {
   const [serviceFilter, setServiceFilter] = useState<string>("all");
   const [deleteConfirmId, setDeleteConfirmId] = useState<number | null>(null);
 
+  const safeJson = async (res: Response) => {
+    const text = await res.text();
+    if (!text || !text.trim()) return null;
+    try { return JSON.parse(text); } catch { return null; }
+  };
+
   const fetchInvoices = async () => {
     try {
       setLoading(true);
@@ -50,8 +56,8 @@ export default function ManualInvoicePage() {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (!res.ok) throw new Error("Failed to fetch invoices");
-      const data = await res.json();
-      setInvoices(data);
+      const data = await safeJson(res);
+      setInvoices(Array.isArray(data) ? data : []);
     } catch (err: any) {
       setError(err.message || "Could not load invoices.");
     } finally {
@@ -66,7 +72,7 @@ export default function ManualInvoicePage() {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (res.ok) {
-        const data = await res.json();
+        const data = await safeJson(res);
         setServicesList(Array.isArray(data) ? data : []);
       }
     } catch { /* non-blocking */ }

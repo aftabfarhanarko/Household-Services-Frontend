@@ -15,9 +15,51 @@ import type { TableAction } from "@/components/ui/table";
 import { Service } from "@/redux/features/admin/service";
 import { useVendorServicesState } from "./hooks/useVendorServicesState";
 import DeleteServiceModal from "./components/DeleteServiceModal";
+import { useAppSelector } from "@/redux/hooks";
+
+const translations = {
+  bn: {
+    title: "আমার সার্ভিসেস",
+    subtitle: "প্ল্যাটফর্মে আপনার সার্ভিস অফারগুলো ম্যানেজ করুন।",
+    addService: "সার্ভিস যোগ করুন",
+    accessDenied: "প্রবেশাধিকার নেই",
+    accessDeniedDesc: "এই প্যানেলটি শুধুমাত্র ভেন্ডরদের জন্য।",
+    serviceName: "সার্ভিসের নাম",
+    slug: "স্লাগ",
+    date: "তারিখ",
+    actions: "অ্যাকশন",
+    view: "দেখুন",
+    edit: "এডিট",
+    delete: "ডিলিট",
+    noServices: "কোনো সার্ভিস পাওয়া যায়নি",
+    noServicesDesc: "ক্লায়েন্টদের অফার করতে আপনার প্রথম সার্ভিস তৈরি করুন।",
+    createFirstService: "নতুন সার্ভিস যোগ করুন",
+    searchPlaceholder: "সার্ভিস খুঁজুন...",
+  },
+  en: {
+    title: "My Services",
+    subtitle: "Manage your service offerings on the platform.",
+    addService: "Add Service",
+    accessDenied: "Access Denied",
+    accessDeniedDesc: "This panel is restricted to Vendors only.",
+    serviceName: "Service Name",
+    slug: "Slug",
+    date: "Date",
+    actions: "Actions",
+    view: "View",
+    edit: "Edit",
+    delete: "Delete",
+    noServices: "No services found",
+    noServicesDesc: "Create your first service to offer to clients.",
+    createFirstService: "Add New Service",
+    searchPlaceholder: "Search services...",
+  },
+};
 
 export default function VendorServicesPage() {
   const state = useVendorServicesState();
+  const lang = useAppSelector((state) => state.lang.value);
+  const t = translations[lang];
 
   if (state.role !== "superadmin" && state.role !== "vendor") {
     return (
@@ -25,8 +67,8 @@ export default function VendorServicesPage() {
         <div className="p-4 bg-[#FFF8F4] rounded-2xl text-[#FF6014] mb-4">
           <ShieldAlert size={48} />
         </div>
-        <h3 className="text-xl font-bold text-slate-800">প্রবেশাধিকার নেই</h3>
-        <p className="text-sm text-slate-500 mt-2 max-w-sm">এই প্যানেলটি শুধুমাত্র ভেন্ডরদের জন্য।</p>
+        <h3 className="text-xl font-bold text-slate-800">{t.accessDenied}</h3>
+        <p className="text-sm text-slate-500 mt-2 max-w-sm">{t.accessDeniedDesc}</p>
       </div>
     );
   }
@@ -34,7 +76,7 @@ export default function VendorServicesPage() {
   const columns = [
     {
       key: "name",
-      header: "সার্ভিসের নাম",
+      header: t.serviceName,
       render: (item: Service) => (
         <div className="flex items-center gap-3">
           <div className="w-12 h-12 bg-[#FFF8F4] text-[#FF6014] rounded-2xl flex items-center justify-center overflow-hidden shrink-0 border border-[#FFF0EB]/40">
@@ -52,7 +94,7 @@ export default function VendorServicesPage() {
     },
     {
       key: "slug",
-      header: "স্লাগ",
+      header: t.slug,
       render: (item: Service) => (
         <span className="inline-flex items-center gap-1.5 bg-slate-100 text-slate-600 font-mono font-bold text-xs px-2.5 py-1 rounded-xl">
           <Globe size={11} />
@@ -62,7 +104,7 @@ export default function VendorServicesPage() {
     },
     {
       key: "createdAt",
-      header: "তারিখ",
+      header: t.date,
       render: (item: Service) => (
         <span className="text-slate-400 text-xs font-medium">
           {item.createdAt ? new Date(item.createdAt).toLocaleDateString() : "—"}
@@ -73,13 +115,13 @@ export default function VendorServicesPage() {
 
   const tableActions: TableAction<Service>[] = [
     {
-      label: "দেখুন",
+      label: t.view,
       icon: Eye,
       onClick: (item) => state.router.push(`/dashbord/vendor-services/${item.id}`),
       variant: "default",
     },
-    { label: "এডিট", icon: Edit2, onClick: (item) => state.router.push(`/dashbord/vendor-services/edit/${item.id}`), variant: "secondary" },
-    { label: "ডিলিট", icon: Trash2, onClick: state.openDeleteModal, variant: "destructive" },
+    { label: t.edit, icon: Edit2, onClick: (item) => state.router.push(`/dashbord/vendor-services/edit/${item.id}`), variant: "secondary" },
+    { label: t.delete, icon: Trash2, onClick: state.openDeleteModal, variant: "destructive" },
   ];
 
   return (
@@ -91,15 +133,15 @@ export default function VendorServicesPage() {
             <Wrench className="w-6 h-6" />
           </div>
           <div>
-            <h1 className="text-xl font-extrabold text-slate-900">আমার সার্ভিসেস</h1>
-            <p className="text-xs text-slate-400 mt-0.5">প্ল্যাটফর্মে আপনার সার্ভিস অফারগুলো ম্যানেজ করুন।</p>
+            <h1 className="text-xl font-extrabold text-slate-900">{t.title}</h1>
+            <p className="text-xs text-slate-400 mt-0.5">{t.subtitle}</p>
           </div>
         </div>
         <button
           onClick={() => state.router.push("/dashbord/vendor-services/create")}
           className="bg-[#FF6014] hover:bg-[#E0530A] text-white font-bold px-5 py-2.5 rounded-xl text-sm flex items-center gap-2 transition-all active:scale-[0.98] shadow-md shadow-[#FF6014]/10"
         >
-          <PlusCircle size={18} /> সার্ভিস যোগ করুন
+          <PlusCircle size={18} /> {t.addService}
         </button>
       </div>
 
@@ -112,15 +154,15 @@ export default function VendorServicesPage() {
           <div className="w-16 h-16 bg-slate-50 text-slate-400 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-slate-100/50">
             <Wrench size={28} />
           </div>
-          <h3 className="text-base font-bold text-slate-800">কোনো সার্ভিস পাওয়া যায়নি</h3>
+          <h3 className="text-base font-bold text-slate-800">{t.noServices}</h3>
           <p className="text-sm text-slate-400 mt-1 max-w-sm mx-auto">
-            ক্লায়েন্টদের অফার করতে আপনার প্রথম সার্ভিস তৈরি করুন।
+            {t.noServicesDesc}
           </p>
           <button
             onClick={() => state.router.push("/dashbord/vendor-services/create")}
             className="mt-4 bg-[#FFF8F4] hover:bg-[#FFF0EB] text-[#FF6014] font-bold px-4 py-2 rounded-xl text-xs transition-all"
           >
-            নতুন সার্ভিস যোগ করুন
+            {t.createFirstService}
           </button>
         </div>
       ) : (
@@ -129,7 +171,7 @@ export default function VendorServicesPage() {
           data={state.services}
           actions={tableActions}
           searchKey="name"
-          searchPlaceholder="সার্ভিস খুঁজুন..."
+          searchPlaceholder={t.searchPlaceholder}
           pageSize={10}
         />
       )}

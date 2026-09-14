@@ -10,6 +10,16 @@ import {
   Menu,
   Briefcase,
   ClipboardList,
+  CalendarCheck,
+  LayoutDashboard,
+  Compass,
+  Headphones,
+  Handshake,
+  HardHat,
+  BadgeCheck,
+  ShieldCheck,
+  Tag,
+  Banknote,
   Heart,
   Wallet,
   User,
@@ -87,21 +97,21 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
 
   // Dynamic grouped menu items based on role (Accordion Tree structure)
   const getSidebarGroups = (userRole: UserRole): SidebarGroup[] => {
-    const homeItem = { label: lang === "bn" ? "হোম পেজ" : "Home Page", icon: Home, href: "/" };
+    const homeItem = { label: lang === "bn" ? "হোম পেজ" : "Home Page", icon: Building2, href: "/" };
 
     switch (userRole) {
       case "superadmin":
         return [
           homeItem,
-          { label: lang === "bn" ? "ওভারভিউ" : "Overview", icon: LayoutGrid, href: "/dashbord" },
+          { label: lang === "bn" ? "ওভারভিউ" : "Overview", icon: LayoutDashboard, href: "/dashbord" },
           { label: lang === "bn" ? "এআই অ্যাডভাইজর" : "AI Advisor", icon: Bot, href: "/dashbord/analytics" },
           {
             label: lang === "bn" ? "অপারেশনস" : "Operations",
-            icon: Calendar,
+            icon: CalendarCheck,
             children: [
-              { label: lang === "bn" ? "বুকিং ম্যানেজ করুন" : "Manage Bookings", href: "/dashbord/manage-bookings", icon: ClipboardList },
+              { label: lang === "bn" ? "বুকিং ম্যানেজ করুন" : "Manage Bookings", href: "/dashbord/manage-bookings", icon: CalendarCheck },
               { label: lang === "bn" ? "কুইক বুকিং" : "Quick Booking", href: "/dashbord/quick-booking", icon: Zap },
-              { label: lang === "bn" ? "উত্তোলনের অনুরোধসমূহ" : "Withdraw Requests", href: "/dashbord/withdraw", icon: Wallet }
+              { label: lang === "bn" ? "উত্তোলনের অনুরোধসমূহ" : "Withdraw Requests", href: "/dashbord/withdraw", icon: Banknote }
             ]
           },
           {
@@ -116,20 +126,20 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
             label: lang === "bn" ? "ইউজার ডিরেক্টরি" : "User Directory",
             icon: Users,
             children: [
-              { label: lang === "bn" ? "সুপার অ্যাডমিন" : "Super Admins", href: "/dashbord/superadmins", icon: Shield },
-              { label: lang === "bn" ? "ক্লায়েন্ট ম্যানেজ করুন" : "Manage Clients", href: "/dashbord/users", icon: Users },
-              { label: lang === "bn" ? "ভেন্ডর ম্যানেজ করুন" : "Manage Vendors", href: "/dashbord/vendors", icon: Briefcase },
-              { label: lang === "bn" ? "এজেন্ট ম্যানেজ করুন" : "Manage Agents", href: "/dashbord/agents", icon: Zap },
-              { label: lang === "bn" ? "কর্মচারী ম্যানেজ করুন" : "Manage Employees", href: "/dashbord/employees", icon: UserPlus },
-              { label: lang === "bn" ? "রোল ম্যানেজমেন্ট" : "Role Management", href: "/dashbord/role", icon: Briefcase }
+              { label: lang === "bn" ? "সুপার অ্যাডমিন" : "Super Admins", href: "/dashbord/superadmins", icon: ShieldCheck },
+              { label: lang === "bn" ? "ক্লায়েন্ট ম্যানেজ করুন" : "Manage Clients", href: "/dashbord/users", icon: UserCheck },
+              { label: lang === "bn" ? "ভেন্ডর ম্যানেজ করুন" : "Manage Vendors", href: "/dashbord/vendors", icon: HardHat },
+              { label: lang === "bn" ? "এজেন্ট ম্যানেজ করুন" : "Manage Agents", href: "/dashbord/agents", icon: BadgeCheck },
+              { label: lang === "bn" ? "কর্মচারী ম্যানেজ করুন" : "Manage Employees", href: "/dashbord/employees", icon: Users },
+              { label: lang === "bn" ? "রোল ম্যানেজমেন্ট" : "Role Management", href: "/dashbord/role", icon: Shield }
             ]
           },
           {
             label: lang === "bn" ? "সার্ভিস ক্যাটালগ" : "Service Catalog",
             icon: Wrench,
             children: [
-              { label: lang === "bn" ? "ক্যাটাগরিস" : "Categories", href: "/dashbord/category", icon: ClipboardList },
-              { label: lang === "bn" ? "লোকেশনসমূহ" : "Locations", href: "/dashbord/locations", icon: MapPin },
+              { label: lang === "bn" ? "ক্যাটাগরিস" : "Categories", href: "/dashbord/category", icon: LayoutGrid },
+              { label: lang === "bn" ? "লোকেশনসমূহ" : "Locations", href: "/dashbord/locations", icon: Compass },
               { label: lang === "bn" ? "সার্ভিসেস" : "Services", href: "/dashbord/services", icon: Wrench },
               { label: lang === "bn" ? "নেস্টেড সার্ভিসেস" : "Nested Services", href: "/dashbord/nested-services", icon: Layers },
               { label: lang === "bn" ? "প্যাকেজসমূহ" : "Packages", href: "/dashbord/packages", icon: Package }
@@ -146,16 +156,16 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
           },
           {
             label: lang === "bn" ? "মার্কেটিং" : "Marketing",
-            icon: Percent,
+            icon: Tag,
             children: [
-              { label: lang === "bn" ? "কুপনসমূহ" : "Coupons", href: "/dashbord/coupons", icon: Percent }
+              { label: lang === "bn" ? "কুপনসমূহ" : "Coupons", href: "/dashbord/coupons", icon: Tag }
             ]
           },
           {
             label: lang === "bn" ? "ম্যানুয়াল ইনভয়েস" : "Manual Invoice",
             icon: Receipt,
             children: [
-              { label: lang === "bn" ? "ড্যাশবোর্ড" : "Dashboard", href: "/dashbord/manual-invoice", icon: LayoutGrid },
+              { label: lang === "bn" ? "ড্যাশবোর্ড" : "Dashboard", href: "/dashbord/manual-invoice", icon: LayoutDashboard },
               { label: lang === "bn" ? "নতুন ইনভয়েস" : "Create Invoice", href: "/dashbord/manual-invoice/create", icon: PlusCircle },
               { label: lang === "bn" ? "ক্লায়েন্ট ডিরেক্টরি" : "Client Directory", href: "/dashbord/manual-invoice/customers", icon: Users },
               { label: lang === "bn" ? "সার্ভিস ক্যাটালগ" : "Service Catalog", href: "/dashbord/manual-invoice/services", icon: Wrench },
@@ -164,10 +174,10 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
           },
           {
             label: lang === "bn" ? "সাপোর্ট ডেস্ক" : "Support Desk",
-            icon: Mail,
+            icon: Headphones,
             children: [
               { label: lang === "bn" ? "টিকেট ম্যানেজমেন্ট" : "Ticket Management", href: "/dashbord/support-desk", icon: Ticket },
-              { label: lang === "bn" ? "যোগাযোগ" : "Contacts", href: "/dashbord/contacts", icon: Mail },
+              { label: lang === "bn" ? "যোগাযোগ" : "Contacts", href: "/dashbord/contacts", icon: Headphones },
               { label: lang === "bn" ? "লাইভ চ্যাট" : "Live Chat", href: "/dashbord/live-chat", icon: MessageSquare },
               { label: lang === "bn" ? "এআই চ্যাট লগ" : "AI Chat Log", href: "/dashbord/ai-chat-log", icon: Bot },
             ]
@@ -183,12 +193,12 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
       case "agent":
         return [
           homeItem,
-          { label: lang === "bn" ? "ওভারভিউ" : "Overview", icon: LayoutGrid, href: "/dashbord" },
+          { label: lang === "bn" ? "ওভারভিউ" : "Overview", icon: LayoutDashboard, href: "/dashbord" },
           {
             label: lang === "bn" ? "অপারেশনস" : "Operations",
-            icon: Calendar,
+            icon: CalendarCheck,
             children: [
-              { label: lang === "bn" ? "বুকিং ম্যানেজ করুন" : "Manage Bookings", href: "/dashbord/manage-bookings", icon: ClipboardList },
+              { label: lang === "bn" ? "বুকিং ম্যানেজ করুন" : "Manage Bookings", href: "/dashbord/manage-bookings", icon: CalendarCheck },
               { label: lang === "bn" ? "কুইক বুকিং" : "Quick Booking", href: "/dashbord/quick-booking", icon: Zap },
               { label: lang === "bn" ? "কমিশনসমূহ" : "Commissions", href: "/dashbord/commissions", icon: Coins },
               { label: lang === "bn" ? "অর্ডারসমূহ" : "Orders", href: "/dashbord/orders", icon: ShoppingBag },
@@ -207,7 +217,7 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
             label: lang === "bn" ? "ম্যানুয়াল ইনভয়েস" : "Manual Invoice",
             icon: Receipt,
             children: [
-              { label: lang === "bn" ? "ড্যাশবোর্ড" : "Invoice Dashboard", href: "/dashbord/manual-invoice", icon: LayoutGrid },
+              { label: lang === "bn" ? "ড্যাশবোর্ড" : "Invoice Dashboard", href: "/dashbord/manual-invoice", icon: LayoutDashboard },
               { label: lang === "bn" ? "নতুন ইনভয়েস" : "Create Invoice", href: "/dashbord/manual-invoice/create", icon: PlusCircle },
               { label: lang === "bn" ? "ক্লায়েন্ট ডিরেক্টরি" : "Client Directory", href: "/dashbord/manual-invoice/customers", icon: Users },
               { label: lang === "bn" ? "সার্ভিস ক্যাটালগ" : "Service Catalog", href: "/dashbord/manual-invoice/services", icon: Wrench },
@@ -216,10 +226,10 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
           },
           {
             label: lang === "bn" ? "সাপোর্ট এবং প্রোফাইল" : "Support & Profile",
-            icon: HelpCircle,
+            icon: Headphones,
             children: [
               { label: lang === "bn" ? "লাইভ চ্যাট" : "Live Chat", href: "/dashbord/live-chat", icon: MessageSquare },
-              { label: lang === "bn" ? "সাপোর্ট ডেস্ক" : "Support Desk", href: "/dashbord/support", icon: HelpCircle },
+              { label: lang === "bn" ? "সাপোর্ট ডেস্ক" : "Support Desk", href: "/dashbord/support", icon: Headphones },
               { label: lang === "bn" ? "আমার প্রোফাইল" : "My Profile", href: "/dashbord/profile", icon: User }
             ]
           }
@@ -227,12 +237,12 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
       case "vendor":
         return [
           homeItem,
-          { label: lang === "bn" ? "ওভারভিউ" : "Overview", icon: LayoutGrid, href: "/dashbord" },
+          { label: lang === "bn" ? "ওভারভিউ" : "Overview", icon: LayoutDashboard, href: "/dashbord" },
           {
             label: lang === "bn" ? "বুকিংস" : "Bookings",
-            icon: Calendar,
+            icon: CalendarCheck,
             children: [
-              { label: lang === "bn" ? "বুকিং ম্যানেজ করুন" : "Manage Bookings", href: "/dashbord/manage-bookings", icon: ClipboardList },
+              { label: lang === "bn" ? "বুকিং ম্যানেজ করুন" : "Manage Bookings", href: "/dashbord/manage-bookings", icon: CalendarCheck },
               { label: lang === "bn" ? "কাস্টম শিফটিং" : "Custom Shifting", href: "/dashbord/custom-shifting", icon: Truck },
               { label: lang === "bn" ? "ওয়ালেট এবং উপার্জন" : "Wallet & Earnings", href: "/dashbord/vendor-wallet", icon: Wallet }
             ]
@@ -241,7 +251,7 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
             label: lang === "bn" ? "সার্ভিসেস" : "Services",
             icon: Wrench,
             children: [
-              { label: lang === "bn" ? "আমার সার্ভিসেস" : "My Services", href: "/dashbord/vendor-services", icon: Briefcase },
+              { label: lang === "bn" ? "আমার সার্ভিসেস" : "My Services", href: "/dashbord/vendor-services", icon: Wrench },
               { label: lang === "bn" ? "নেস্টেড সার্ভিসেস" : "Nested Services", href: "/dashbord/nested-services", icon: Layers },
               { label: lang === "bn" ? "প্যাকেজসমূহ" : "Packages", href: "/dashbord/vendor-packages", icon: Package }
             ]
@@ -250,13 +260,13 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
             label: lang === "bn" ? "টিম এবং ক্লাইন্টস" : "Team & Clients",
             icon: Users,
             children: [
-              { label: lang === "bn" ? "আমার কর্মচারীবৃন্দ" : "My Employees", href: "/dashbord/employees", icon: UserPlus },
+              { label: lang === "bn" ? "আমার কর্মচারীবৃন্দ" : "My Employees", href: "/dashbord/employees", icon: HardHat },
               { label: lang === "bn" ? "আমার ক্লাইন্টস" : "My Clients", href: "/dashbord/users", icon: UserCheck }
             ]
           },
           {
             label: lang === "bn" ? "সাপোর্ট এবং প্রোফাইল" : "Support & Profile",
-            icon: HelpCircle,
+            icon: Headphones,
             children: [
               { label: lang === "bn" ? "লাইভ চ্যাট" : "Live Chat", href: "/dashbord/live-chat", icon: MessageSquare },
               { label: lang === "bn" ? "আমার প্রোফাইল" : "My Profile", href: "/dashbord/profile", icon: User }
@@ -266,10 +276,10 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
       case "client":
         return [
           homeItem,
-          { label: lang === "bn" ? "ওভারভিউ" : "Overview", icon: LayoutGrid, href: "/dashbord/overview" },
-          { label: lang === "bn" ? "আমার বুকিংস" : "My Bookings", icon: Calendar, href: "/dashbord/bookings" },
+          { label: lang === "bn" ? "ওভারভিউ" : "Overview", icon: LayoutDashboard, href: "/dashbord/overview" },
+          { label: lang === "bn" ? "আমার বুকিংস" : "My Bookings", icon: CalendarCheck, href: "/dashbord/bookings" },
           { label: lang === "bn" ? "সংরক্ষিত সার্ভিসেস" : "Saved Services", icon: Heart, href: "/dashbord/saved" },
-          { label: lang === "bn" ? "হেল্প সেন্টার" : "Help Center", icon: HelpCircle, href: "/dashbord/help" },
+          { label: lang === "bn" ? "হেল্প সেন্টার" : "Help Center", icon: Headphones, href: "/dashbord/help" },
           { label: lang === "bn" ? "আমার প্রোফাইল" : "My Profile", icon: User, href: "/dashbord/profile" }
         ];
       default:

@@ -53,6 +53,7 @@ export function useHeroState() {
       toast.error(err.message || "Failed to upload image");
     } finally {
       setIsUploadingImage(false);
+      if (e.target) e.target.value = "";
     }
   };
 

@@ -7,8 +7,11 @@ import { useServiceState } from "./hooks/useServiceState";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
+import { useAppSelector } from "@/redux/hooks";
+
 export default function AdminServicesManagementPage() {
   const router = useRouter();
+  const lang = useAppSelector((state) => state.lang.value);
   const {
     role,
     isServicesLoading,
@@ -27,8 +30,10 @@ export default function AdminServicesManagementPage() {
         <div className="p-4 bg-rose-50 rounded-2xl text-rose-500 mb-4">
           <ShieldAlert size={48} />
         </div>
-        <h3 className="text-xl font-bold text-slate-800">Access Denied</h3>
-        <p className="text-sm text-slate-500 mt-2 max-w-sm">This panel is restricted to Administrators and Agents.</p>
+        <h3 className="text-xl font-bold text-slate-800">{lang === "bn" ? "অ্যাক্সেস অস্বীকৃত" : "Access Denied"}</h3>
+        <p className="text-sm text-slate-500 mt-2 max-w-sm">
+          {lang === "bn" ? "এই প্যানেলটি শুধুমাত্র অ্যাডমিন এবং এজেন্টদের জন্য।" : "This panel is restricted to Administrators and Agents."}
+        </p>
       </div>
     );
   }
@@ -42,8 +47,12 @@ export default function AdminServicesManagementPage() {
             <Wrench className="w-6 h-6" />
           </div>
           <div>
-            <h1 className="text-xl font-extrabold text-slate-900">Manage Services</h1>
-            <p className="text-xs text-slate-400 mt-0.5">Create and manage all services across the platform.</p>
+            <h1 className="text-xl font-extrabold text-slate-900">
+              {lang === "bn" ? "সার্ভিসেস ব্যবস্থাপনা" : "Manage Services"}
+            </h1>
+            <p className="text-xs text-slate-400 mt-0.5">
+              {lang === "bn" ? "প্লাটফর্মের সকল প্রধান সার্ভিস তৈরি এবং কনফিগার করুন।" : "Create and manage all services across the platform."}
+            </p>
           </div>
         </div>
         {role === "superadmin" && (
@@ -51,7 +60,7 @@ export default function AdminServicesManagementPage() {
             href="/dashbord/services/create"
             className="bg-brand-primary hover:bg-brand-dark text-white font-bold px-5 py-2.5 rounded-xl text-sm flex items-center gap-2 transition-all active:scale-[0.98] shadow-md shadow-brand-primary/10"
           >
-            <PlusCircle size={18} /> Add Service
+            <PlusCircle size={18} /> {lang === "bn" ? "নতুন সার্ভিস যোগ করুন" : "Add Service"}
           </Link>
         )}
       </div>
@@ -66,13 +75,17 @@ export default function AdminServicesManagementPage() {
           <div className="w-16 h-16 bg-slate-50 text-slate-400 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-slate-100/50">
             <Wrench size={28} />
           </div>
-          <h3 className="text-base font-bold text-slate-800">No Services Found</h3>
-          <p className="text-sm text-slate-400 mt-1 max-w-sm mx-auto">Start by creating your first service.</p>
+          <h3 className="text-base font-bold text-slate-800">
+            {lang === "bn" ? "কোনো সার্ভিস পাওয়া যায়নি" : "No Services Found"}
+          </h3>
+          <p className="text-sm text-slate-400 mt-1 max-w-sm mx-auto">
+            {lang === "bn" ? "আপনার প্রথম সার্ভিস তৈরি করে শুরু করুন।" : "Start by creating your first service."}
+          </p>
           <Link
             href="/dashbord/services/create"
             className="mt-4 inline-block bg-rose-50 hover:bg-rose-100 text-rose-500 font-bold px-4 py-2 rounded-xl text-xs transition-all"
           >
-            Add New Service
+            {lang === "bn" ? "নতুন সার্ভিস যোগ করুন" : "Add New Service"}
           </Link>
         </div>
       ) : (

@@ -6,6 +6,7 @@ import { CustomTable } from "@/components/ui/table";
 import type { TableAction } from "@/components/ui/table";
 import { useRouter } from "next/navigation";
 import { Service } from "@/redux/features/admin/service";
+import { useAppSelector } from "@/redux/hooks";
 
 interface ServiceTableProps {
   services: Service[];
@@ -21,11 +22,39 @@ export default function ServiceTable({
   openDeleteModal,
 }: ServiceTableProps) {
   const router = useRouter();
+  const lang = useAppSelector((state) => state.lang.value);
+
+  const t = {
+    bn: {
+      serviceName: "সার্ভিসের নাম",
+      slug: "স্লাগ",
+      category: "ক্যাটাগরি",
+      vendor: "ভেন্ডর",
+      agentCommission: "এজেন্ট কমিশন",
+      created: "তৈরির তারিখ",
+      viewDetails: "বিবরণ দেখুন",
+      edit: "এডিট",
+      delete: "ডিলিট",
+      searchPlaceholder: "সার্ভিস খুঁজুন...",
+    },
+    en: {
+      serviceName: "Service Name",
+      slug: "Slug",
+      category: "Category",
+      vendor: "Vendor",
+      agentCommission: "Agent Commission",
+      created: "Created Date",
+      viewDetails: "View Details",
+      edit: "Edit",
+      delete: "Delete",
+      searchPlaceholder: "Search services...",
+    },
+  }[lang];
 
   const columns = [
     {
       key: "name",
-      header: "Service Name",
+      header: t.serviceName,
       render: (item: Service) => (
         <div className="flex items-center gap-3">
           <div className="w-12 h-12 bg-rose-50 text-rose-500 rounded-2xl flex items-center justify-center overflow-hidden shrink-0 border border-rose-100/40">
@@ -43,7 +72,7 @@ export default function ServiceTable({
     },
     {
       key: "slug",
-      header: "Slug",
+      header: t.slug,
       render: (item: Service) => (
         <span className="inline-flex items-center gap-1.5 bg-slate-100 text-slate-600 font-mono font-bold text-xs px-2.5 py-1 rounded-xl">
           <Globe size={11} />
@@ -53,7 +82,7 @@ export default function ServiceTable({
     },
     {
       key: "category",
-      header: "Category",
+      header: t.category,
       render: (item: Service | any) => (
         <span className="inline-flex items-center gap-1.5 bg-indigo-50/70 text-indigo-700 font-bold text-xs px-2.5 py-1 rounded-xl border border-indigo-100/50">
           <Tag size={11} />
@@ -63,7 +92,7 @@ export default function ServiceTable({
     },
     {
       key: "vendor",
-      header: "Vendor",
+      header: t.vendor,
       render: (item: Service | any) => (
         <span className="inline-flex items-center gap-1.5 bg-emerald-50/70 text-emerald-700 font-bold text-xs px-2.5 py-1 rounded-xl border border-emerald-100/50">
           <User size={11} />
@@ -73,7 +102,7 @@ export default function ServiceTable({
     },
     {
       key: "commission",
-      header: "Agent Commission",
+      header: t.agentCommission,
       render: (item: Service | any) => (
         <span className="inline-flex items-center gap-1.5 bg-amber-50/70 text-amber-700 font-bold text-xs px-2.5 py-1 rounded-xl border border-amber-100/50">
           <Sparkles size={11} />
@@ -83,7 +112,7 @@ export default function ServiceTable({
     },
     {
       key: "createdAt",
-      header: "Created",
+      header: t.created,
       render: (item: Service) => (
         <span className="text-slate-400 text-xs font-medium">
           {item.createdAt ? new Date(item.createdAt).toLocaleDateString() : "—"}
@@ -94,15 +123,15 @@ export default function ServiceTable({
 
   const tableActions: TableAction<Service>[] = [
     {
-      label: "View Details",
+      label: t.viewDetails,
       icon: Eye,
       onClick: (item) => router.push(`/dashbord/services/${item.id || (item as any)._id}`),
       variant: "default",
     },
     ...(role === "superadmin"
       ? [
-          { label: "Edit", icon: Edit2, onClick: openEditModal, variant: "secondary" as const },
-          { label: "Delete", icon: Trash2, onClick: openDeleteModal, variant: "destructive" as const },
+          { label: t.edit, icon: Edit2, onClick: openEditModal, variant: "secondary" as const },
+          { label: t.delete, icon: Trash2, onClick: openDeleteModal, variant: "destructive" as const },
         ]
       : []),
   ];
@@ -113,7 +142,7 @@ export default function ServiceTable({
       data={services}
       actions={tableActions}
       searchKey="name"
-      searchPlaceholder="Search services..."
+      searchPlaceholder={t.searchPlaceholder}
       pageSize={10}
     />
   );

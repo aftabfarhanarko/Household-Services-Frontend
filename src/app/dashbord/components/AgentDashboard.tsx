@@ -14,6 +14,7 @@ import {
 
 export default function AgentDashboard() {
   const authUser = useAppSelector((state) => state.auth.user);
+  const lang = useAppSelector((state) => state.lang.value);
 
   const { data: bookingsRes } = useGetAllBookingsQuery();
 
@@ -41,32 +42,99 @@ export default function AgentDashboard() {
     0
   );
 
+  const t = {
+    bn: {
+      agentDesk: "এজেন্ট পার্টনার ডেস্ক",
+      hello: "হ্যালো,",
+      subtitle: "ক্লায়েন্টদের পক্ষে সার্ভিস বুকিং করুন এবং কমিশন ট্র্যাক করুন।",
+      quickBooking: "কুইক বুকিং কনসোল",
+      bookingsPlaced: "সম্পাদিত বুকিং",
+      activeThisWeek: "এই সপ্তাহে অ্যাক্টিভ",
+      totalOrderVolume: "মোট অর্ডার ভলিউম",
+      lifetimeBookingValue: "মোট বুকিং ভ্যালু",
+      estCommission: "আনুমানিক কমিশন",
+      totalEarnings: "মোট সম্ভাব্য আয়",
+      walletBalance: "ওয়ালেট ব্যালেন্স",
+      availableForWithdraw: "উত্তোলনের জন্য উপলব্ধ",
+      recentOrders: "সাম্প্রতিক লিড অর্ডারসমূহ",
+      viewAll: "সব দেখুন",
+      orderId: "অর্ডার আইডি",
+      client: "ক্লায়েন্ট",
+      service: "সার্ভিস",
+      price: "মূল্য",
+      commission: "কমিশন",
+      status: "স্ট্যাটাস",
+      searchOrders: "অর্ডার খুঁজুন...",
+      commissionTier: "কমিশন টায়ার",
+      currentDefaultRate: "বর্তমান কমিশন রেট",
+      commissionRateSuffix: "% কমিশন",
+      tierPrompt: "১৮% সিলভার পার্টনার কমিশন রেট আনলক করতে আরও ২৬টি বুকিং সম্পন্ন করুন!",
+      partnerBenefits: "পার্টনার সুবিধাসমূহ",
+      directPayouts: "সরাসরি পে-আউট",
+      payoutDesc: "বিকাশে তাত্ক্ষণিক পেমেন্ট গ্রহণ করুন",
+      customCoupons: "কাস্টম এজেন্ট কুপন",
+      couponDesc: "আপনার ক্লায়েন্টদের জন্য ৫% ডিসকাউন্ট দিন",
+    },
+    en: {
+      agentDesk: "Agent Partner Desk",
+      hello: "Hello,",
+      subtitle: "Book services on behalf of clients and track your commissions.",
+      quickBooking: "Quick Booking Console",
+      bookingsPlaced: "Bookings Placed",
+      activeThisWeek: "active this week",
+      totalOrderVolume: "Total Order Volume",
+      lifetimeBookingValue: "Lifetime booking value",
+      estCommission: "Est. Commission",
+      totalEarnings: "Total potential earnings",
+      walletBalance: "Wallet Balance",
+      availableForWithdraw: "Available for withdrawal",
+      recentOrders: "Recent Placed Orders",
+      viewAll: "View All Orders",
+      orderId: "Order ID",
+      client: "Client",
+      service: "Service",
+      price: "Price",
+      commission: "Commission",
+      status: "Status",
+      searchOrders: "Search orders...",
+      commissionTier: "Commission Tier",
+      currentDefaultRate: "Current Default Rate",
+      commissionRateSuffix: "% Commission",
+      tierPrompt: "Complete 26 more bookings to unlock 18% Silver Partner commission rate!",
+      partnerBenefits: "Partner Benefits",
+      directPayouts: "Direct Payouts",
+      payoutDesc: "Withdraw to bKash instantly",
+      customCoupons: "Custom Agent Coupons",
+      couponDesc: "Offer 5% off to your clients",
+    },
+  }[lang];
+
   const stats = [
     {
-      label: "Bookings Placed",
-      value: `${totalBookings} Orders`,
-      desc: `${thisWeekBookings} active this week`,
+      label: t.bookingsPlaced,
+      value: `${totalBookings} ${lang === "bn" ? "অর্ডার" : "Orders"}`,
+      desc: `${thisWeekBookings} ${t.activeThisWeek}`,
       icon: Briefcase,
       color: "text-[#E0530A] bg-[#FFF8F4]",
     },
     {
-      label: "Total Order Volume",
+      label: t.totalOrderVolume,
       value: `৳${totalOrderVolume.toLocaleString()}`,
-      desc: "Lifetime booking value",
+      desc: t.lifetimeBookingValue,
       icon: Zap,
       color: "text-amber-600 bg-amber-50",
     },
     {
-      label: "Est. Commission",
+      label: t.estCommission,
       value: `৳${totalCommission.toLocaleString()}`,
-      desc: "Total potential earnings",
+      desc: t.totalEarnings,
       icon: DollarSign,
       color: "text-emerald-600 bg-emerald-50",
     },
     {
-      label: "Wallet Balance",
+      label: t.walletBalance,
       value: `৳${authUser?.wallet_balance || 0}`,
-      desc: "Available for withdrawal",
+      desc: t.availableForWithdraw,
       icon: Clock,
       color: "text-indigo-600 bg-indigo-50",
     },
@@ -92,20 +160,20 @@ export default function AgentDashboard() {
   const agentColumns = [
     {
       key: "id",
-      header: "Order ID",
+      header: t.orderId,
       render: (o: any) => <span className="font-bold text-brand-primary">{o.id}</span>,
     },
-    { key: "customer", header: "Client" },
-    { key: "service", header: "Service" },
-    { key: "amount", header: "Price" },
+    { key: "customer", header: t.client },
+    { key: "service", header: t.service },
+    { key: "amount", header: t.price },
     {
       key: "commission",
-      header: "Commission",
+      header: t.commission,
       render: (o: any) => <span className="font-bold text-emerald-600">+{o.commission}</span>,
     },
     {
       key: "status",
-      header: "Status",
+      header: t.status,
       render: (o: any) => (
         <span
           className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold capitalize ${
@@ -133,17 +201,16 @@ export default function AgentDashboard() {
               <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse inline-block" />
               Agent Partner
             </div>
-            <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">Agent Partner Desk</h1>
+            <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">{t.agentDesk}</h1>
             <p className="text-slate-400 mt-1.5 text-sm font-medium">
-              Hello, <span className="text-slate-600 font-semibold">{authUser?.name || "Agent"}</span>! Book services on
-              behalf of clients and track your commissions.
+              {t.hello} <span className="text-slate-600 font-semibold">{authUser?.name || "Agent"}</span>! {t.subtitle}
             </p>
           </div>
           <Link
             href="/dashbord/quick-booking"
             className="shrink-0 bg-gradient-to-br from-[#FF6014] to-[#E0530A] hover:from-[#E0530A] hover:to-[#CC5049] text-white font-bold px-6 py-3 rounded-2xl shadow-lg shadow-[#FF6014]/25 text-sm transition-all active:scale-[0.985] text-center flex items-center gap-2 w-fit"
           >
-            <Zap size={15} /> Quick Booking Console
+            <Zap size={15} /> {t.quickBooking}
           </Link>
         </div>
       </div>
@@ -181,43 +248,43 @@ export default function AgentDashboard() {
         {/* Recent Orders */}
         <div className="lg:col-span-2 space-y-4">
           <div className="flex justify-between items-center bg-white p-4 rounded-2xl border border-slate-100 shadow-premium">
-            <h3 className="text-lg font-bold text-slate-900">Recent Placed Orders</h3>
+            <h3 className="text-lg font-bold text-slate-900">{t.recentOrders}</h3>
             <Link href="/dashbord/orders" className="text-xs font-semibold text-[#FF6014] hover:underline">
-              View All Orders
+              {t.viewAll}
             </Link>
           </div>
           <CustomTable
             columns={agentColumns}
             data={agentOrders}
             searchKey="customer"
-            searchPlaceholder="Search orders..."
+            searchPlaceholder={t.searchOrders}
             pageSize={5}
           />
         </div>
 
         {/* Commission Tier */}
         <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-6">
-          <h3 className="text-lg font-bold text-slate-900">Commission Tier</h3>
+          <h3 className="text-lg font-bold text-slate-900">{t.commissionTier}</h3>
 
           <div className="p-4 bg-slate-50 border border-slate-100 rounded-xl space-y-4">
             <div className="flex justify-between items-center text-xs font-bold text-slate-400 uppercase">
-              <span>Current Default Rate</span>
-              <span className="text-[#FF6014] text-sm">{authUser?.commission_percentage || 0}% Commission</span>
+              <span>{t.currentDefaultRate}</span>
+              <span className="text-[#FF6014] text-sm">{authUser?.commission_percentage || 0}{t.commissionRateSuffix}</span>
             </div>
             <div className="h-2 w-full bg-slate-200 rounded-full overflow-hidden">
               <div className="h-full bg-[#FF6014] rounded-full w-3/4" />
             </div>
             <p className="text-xs text-slate-400 font-medium">
-              Complete 26 more bookings to unlock **18% Silver Partner commission** rate!
+              {t.tierPrompt}
             </p>
           </div>
 
           <div className="space-y-3">
-            <h4 className="text-sm font-bold text-slate-800">Partner Benefits</h4>
+            <h4 className="text-sm font-bold text-slate-800">{t.partnerBenefits}</h4>
             <div className="space-y-2">
               {[
-                { title: "Direct Payouts", desc: "Withdraw to bKash instantly" },
-                { title: "Custom Agent Coupons", desc: "Offer 5% off to your clients" },
+                { title: t.directPayouts, desc: t.payoutDesc },
+                { title: t.customCoupons, desc: t.couponDesc },
               ].map((b, idx) => (
                 <div key={idx} className="flex gap-3 text-xs">
                   <span className="text-[#FF6014] font-bold">✓</span>

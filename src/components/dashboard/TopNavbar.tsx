@@ -309,10 +309,10 @@ export function TopNavbar({ onMenuClick }: { onMenuClick?: () => void }) {
       {/* Right Navbar Controls */}
       <div className="flex items-center gap-5">
 
-        {/* Language Toggle Switcher (Premium Pill) */}
+        {/* Language Toggle Switcher (Premium Pill) - Hidden on mobile, visible on laptop & desktop */}
         <button
           onClick={() => dispatch(toggleLanguage())}
-          className="relative flex items-center gap-2 bg-slate-100/70 hover:bg-slate-200/70 active:scale-95 transition-all duration-200 px-3 py-1.5 rounded-full border border-slate-200/80 shadow-xs cursor-pointer group"
+          className="relative hidden md:flex items-center gap-2 bg-slate-100/70 hover:bg-slate-200/70 active:scale-95 transition-all duration-200 px-3 py-1.5 rounded-full border border-slate-200/80 shadow-xs cursor-pointer group"
           title={lang === "bn" ? "Switch to English" : "বাংলায় পরিবর্তন করুন"}
         >
           <Languages size={15} className="text-[#FF6014] group-hover:rotate-12 transition-transform duration-300" />

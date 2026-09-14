@@ -11,6 +11,12 @@ import {
   Briefcase,
   Map as MapIcon,
   Calendar,
+  CalendarCheck,
+  Compass,
+  Building2,
+  Wrench,
+  Headphones,
+  Handshake,
   Search,
   ChevronDown,
   Home as HomeIcon,
@@ -115,12 +121,12 @@ function getCategorySubtitle(name: string): string {
 // mobile bottom nav / footer / direct links elsewhere in the app.
 const LEFT_NAV_LINKS: NavLink[] = [
   { label: "Home", href: "/", icon: HomeIcon },
-  { label: "Services", href: "/services", icon: Briefcase, hasDropdown: true },
-  { label: "Bookings", href: "/bookings", icon: Calendar },
-  { label: " Map", href: "/map", icon: MapPin },
-  { label: "About Us", href: "/about", icon: Info },
-  { label: "Contact", href: "/contact", icon: PhoneCall },
-  { label: "Opportunity", href: "/opportunity", icon: TrendingUp },
+  { label: "Services", href: "/services", icon: Wrench, hasDropdown: true },
+  { label: "Bookings", href: "/bookings", icon: CalendarCheck },
+  { label: "Map", href: "/map", icon: Compass },
+  { label: "About Us", href: "/about", icon: Building2 },
+  { label: "Contact", href: "/contact", icon: Headphones },
+  { label: "Opportunity", href: "/opportunity", icon: Handshake },
 ];
 
 const RIGHT_NAV_LINKS: NavLink[] = [];
@@ -129,9 +135,9 @@ const ALL_NAV_LINKS: NavLink[] = [...LEFT_NAV_LINKS, ...RIGHT_NAV_LINKS];
 
 const MOBILE_BOTTOM_LINKS: NavLink[] = [
   { label: "Home", href: "/", icon: HomeIcon },
-  { label: "Services", href: "/services", icon: Briefcase },
-  { label: "Booking", href: "/bookings", icon: Calendar },
-  { label: "Opportunity", href: "/opportunity", icon: TrendingUp },
+  { label: "Services", href: "/services", icon: Wrench },
+  { label: "Booking", href: "/bookings", icon: CalendarCheck },
+  { label: "Opportunity", href: "/opportunity", icon: Handshake },
   { label: "Login", href: "/login", icon: User },
 ];
 

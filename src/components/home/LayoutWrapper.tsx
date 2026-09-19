@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import { Navbar } from "./Navbar";
 import Footer from "./Footer";
 import { AiChatBot } from "./AiChatBot";
+import BackendKeepAlive from "../common/BackendKeepAlive";
 
 export function LayoutWrapper({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -17,6 +18,7 @@ export function LayoutWrapper({ children }: { children: React.ReactNode }) {
 
   return (
     <>
+      <BackendKeepAlive />
       {!hideLayout && <Navbar />}
       <main className="grow flex flex-col">
         {children}
